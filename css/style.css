@@ -1,3 +1,8 @@
+:root {
+    --teal: #2ec1ac;
+    --tealHover: #279e8c;
+}
+
 * {
     font-family: "Poppins", sans-serif;
 }
@@ -13,17 +18,29 @@ input::-webkit-inner-spin-button {
 }
 
 .custom-bg {
-    background-color: #2ec1ac;
+    background-color: var(--teal);
 }
 
 .custom-bg:hover {
-    background-color: #279e8c;
+    background-color: var(--tealHover);
 }
 
 .availability-form {
     margin-top: -50px;
     z-index: 2;
     position: relative;
+}
+
+.h-line {
+    width: 150px;
+    margin: 0 auto;
+    height: 1.7px;
+}
+
+.pop:hover {
+    border-top-color: var(--teal) !important;
+    transform: scale(1.03);
+    transition: all 0.3s;
 }
 
 @media screen and (max-width: 575px) {

@@ -10,13 +10,13 @@
             <h5 class="mb-3">Links</h5>
             <ul class="list-unstyled">
                 <li>
-                    <a href="#" class="text-white text-decoration-none d-block mb-2">Home</a>
+                    <a href="index.php" class="text-white text-decoration-none d-block mb-2">Home</a>
                 </li>
                 <li>
                     <a href="#" class="text-white text-decoration-none d-block mb-2">Rooms</a>
                 </li>
                 <li>
-                    <a href="#" class="text-white text-decoration-none d-block mb-2">Facilities</a>
+                    <a href="facilities.php" class="text-white text-decoration-none d-block mb-2">Facilities</a>
                 </li>
                 <li>
                     <a href="#" class="text-white text-decoration-none d-block mb-2">Contact Us</a>
