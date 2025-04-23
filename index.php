@@ -11,6 +11,7 @@
 
 <body>
     <?php require('inc/header.php'); ?>
+    <?php require('inc/modal.php'); ?>
 
     <!-- carousel header -->
     <div class="container-fluid">
