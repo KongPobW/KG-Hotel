@@ -107,37 +107,10 @@
                             <span class="badge rounded-pill text-bg-light text-wrap lh-base">Water Heater</span>
                             <span class="badge rounded-pill text-bg-light text-wrap lh-base">Television</span>
                         </div>
-                        <div class="rating mb-4">
-                            <h6 class="mb-1">Rating</h6>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                        </div>
-                        <div class="d-flex mb-2 gap-2">
-                            <a href="#" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
-                            <a href="#" class="btn btn-sm btn-outline-dark shadow-none">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 my-3">
-                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                    <img src="images/rooms/1.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <h5>Simple Room Name</h5>
-                        <h6 class="mb-4">฿6,120 per night</h6>
-                        <div class="features mb-4">
-                            <h6 class="mb-1">Features</h6>
-                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bedroom</span>
-                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bathroom</span>
-                        </div>
-                        <div class="facilities mb-4">
-                            <h6 class="mb-1">Facilities</h6>
-                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">AC</span>
-                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">Wifi</span>
-                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">Water Heater</span>
-                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">Television</span>
+                        <div class="guests mb-4">
+                            <h6 class="mb-1">Guests</h6>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">5 Adults</span>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">2 Children</span>
                         </div>
                         <div class="rating mb-4">
                             <h6 class="mb-1">Rating</h6>
@@ -170,6 +143,48 @@
                             <span class="badge rounded-pill text-bg-light text-wrap lh-base">Wifi</span>
                             <span class="badge rounded-pill text-bg-light text-wrap lh-base">Water Heater</span>
                             <span class="badge rounded-pill text-bg-light text-wrap lh-base">Television</span>
+                        </div>
+                        <div class="guests mb-4">
+                            <h6 class="mb-1">Guests</h6>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">5 Adults</span>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">2 Children</span>
+                        </div>
+                        <div class="rating mb-4">
+                            <h6 class="mb-1">Rating</h6>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <div class="d-flex mb-2 gap-2">
+                            <a href="#" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
+                            <a href="#" class="btn btn-sm btn-outline-dark shadow-none">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
+                    <img src="images/rooms/1.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <h5>Simple Room Name</h5>
+                        <h6 class="mb-4">฿6,120 per night</h6>
+                        <div class="features mb-4">
+                            <h6 class="mb-1">Features</h6>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bedroom</span>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bathroom</span>
+                        </div>
+                        <div class="facilities mb-4">
+                            <h6 class="mb-1">Facilities</h6>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">AC</span>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">Wifi</span>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">Water Heater</span>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">Television</span>
+                        </div>
+                        <div class="guests mb-4">
+                            <h6 class="mb-1">Guests</h6>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">5 Adults</span>
+                            <span class="badge rounded-pill text-bg-light text-wrap lh-base">2 Children</span>
                         </div>
                         <div class="rating mb-4">
                             <h6 class="mb-1">Rating</h6>
@@ -215,7 +230,8 @@
                 <h5 class="mt-3">Water Heater</h5>
             </div>
             <div class="col-lg-12 text-center mt-5">
-                <a href="facilities.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Facilities ></a>
+                <a href="facilities.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More
+                    Facilities ></a>
             </div>
         </div>
     </div>
