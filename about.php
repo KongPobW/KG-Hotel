@@ -14,7 +14,7 @@
     <?php require('inc/modal.php'); ?>
 
     <div class="my-5 px-4">
-        <h2 class="fw-bold h-font text-center">About Us</h2>
+        <h2 class="fw-bold h-font text-center">ABOUT US</h2>
         <div class="h-line bg-dark"></div>
         <div class="row">
             <p class="text-center mt-3 w-75 mx-auto">
