@@ -20,7 +20,7 @@
                     <a class="nav-link me-2" href="#">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link me-2" href="#">About Us</a>
+                    <a class="nav-link me-2" href="about.php">About Us</a>
                 </li>
             </ul>
             <div class="d-flex">

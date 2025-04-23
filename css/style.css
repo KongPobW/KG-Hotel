@@ -43,6 +43,10 @@ input::-webkit-inner-spin-button {
     transition: all 0.3s;
 }
 
+.box {
+    border-top-color: var(--teal) !important;
+}
+
 @media screen and (max-width: 575px) {
     .availability-form {
         margin-top: 25px;
