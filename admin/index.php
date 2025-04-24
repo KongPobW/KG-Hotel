@@ -1,3 +1,14 @@
+<?php
+    session_start();
+
+    require('inc/db_config.php');
+    require('inc/utils.php');
+
+    if (isset($_SESSION['isAdminLogin']) && $_SESSION['isAdminLogin'] == true) {
+        redirect('dashboard.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,11 +39,6 @@
     </div>
 
     <?php
-    session_start();
-
-    require('inc/db_config.php');
-    require('inc/utils.php');
-
     if (isset($_POST['login'])) {
         $admin_name = $_POST['admin_name'];
         $admin_pass = $_POST['admin_pass'];
@@ -42,8 +48,9 @@
 
         if ($stmt->rowCount() > 0) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             $_SESSION['admin_id'] = $user['sr_no'];
+            $_SESSION['isAdminLogin'] = true;
 
             redirect('dashboard.php');
         } else {
