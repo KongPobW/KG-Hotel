@@ -13,7 +13,7 @@
                     <a href="index.php" class="text-white text-decoration-none d-block mb-2">Home</a>
                 </li>
                 <li>
-                    <a href="#" class="text-white text-decoration-none d-block mb-2">Rooms</a>
+                    <a href="rooms.php" class="text-white text-decoration-none d-block mb-2">Rooms</a>
                 </li>
                 <li>
                     <a href="facilities.php" class="text-white text-decoration-none d-block mb-2">Facilities</a>
