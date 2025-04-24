@@ -19,7 +19,7 @@
                     <a href="facilities.php" class="text-white text-decoration-none d-block mb-2">Facilities</a>
                 </li>
                 <li>
-                    <a href="#" class="text-white text-decoration-none d-block mb-2">Contact Us</a>
+                    <a href="contact.php" class="text-white text-decoration-none d-block mb-2">Contact Us</a>
                 </li>
                 <li>
                     <a href="about.php" class="text-white text-decoration-none d-block mb-2">About Us</a>
