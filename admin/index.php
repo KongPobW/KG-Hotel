@@ -18,6 +18,13 @@
     <title>Admin Login</title>
     <?php require('inc/link.php'); ?>
     <link rel="stylesheet" href="./css/common.css">
+    <style>
+    .custom-alert {
+        position: fixed;
+        top: 25px;
+        right: 25px;
+    }
+    </style>
 </head>
 
 <body class="bg-light">
