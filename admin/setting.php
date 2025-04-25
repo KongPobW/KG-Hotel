@@ -54,18 +54,18 @@
                                     <div class="mb-3">
                                         <label class="form-label">Site Title</label>
                                         <input type="text" name="site_title" id="site_title_input"
-                                            class="form-control shadow-none">
+                                            class="form-control shadow-none" required>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">About Us</label>
                                         <textarea class="form-control shadow-none" name="site_about"
-                                            id="site_about_input" rows="5"></textarea>
+                                            id="site_about_input" rows="5" required></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal"
                                         onclick="getGeneralSetting()">CANCEL</button>
-                                    <button type="button" class="btn custom-bg text-white shadow-none"
+                                    <button type="submit" class="btn custom-bg text-white shadow-none"
                                         onclick="updateGeneralSetting()">SUBMIT</button>
                                 </div>
                             </div>
