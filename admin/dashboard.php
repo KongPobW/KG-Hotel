@@ -10,9 +10,14 @@
 </head>
 
 <body class="bg-light">
-    <div class="container-fluid bg-dark text-light p-3 d-flex align-items-center justify-content-between">
-        <h3 class="mb-0">ADMIN PANEL</h3>
-        <a href="logout.php" class="btn btn-light btn-sm">LOG OUT</a>
+    <?php require('inc/header.php'); ?>
+
+    <div class="container-fluid" id="main-content">
+        <dic class="row">
+            <div class="col-lg-10 ms-auto p-4 overflow-hidden">
+
+            </div>
+        </dic>
     </div>
 
     <?php require('inc/script.php'); ?>
