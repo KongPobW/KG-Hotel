@@ -15,19 +15,53 @@
             <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="admin-dropdown">
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="dashboard.php">Dashboard</a>
+                        <a class="nav-link text-light" href="dashboard.php" id="dashboard-link">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Rooms</a>
+                        <a class="nav-link text-light" href="#" id="rooms-link">Rooms</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Users</a>
+                        <a class="nav-link text-light" href="#" id="users-link">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="setting.php">Setting</a>
+                        <a class="nav-link text-light" href="setting.php" id="setting-link">Setting</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
+
+<script>
+window.onload = function() {
+    let currentPath = window.location.pathname;
+
+    let menuItems = [{
+            id: 'dashboard-link',
+            path: '/dashboard.php'
+        },
+        {
+            id: 'rooms-link',
+            path: '/#'
+        },
+        {
+            id: 'users-link',
+            path: '/#'
+        },
+        {
+            id: 'setting-link',
+            path: '/setting.php'
+        }
+    ];
+
+    menuItems.forEach(item => {
+        let menuLink = document.getElementById(item.id);
+
+        if (currentPath.includes(item.path)) {
+            menuLink.classList.add('active');
+        } else {
+            menuLink.classList.remove('active');
+        }
+    });
+};
+</script>
