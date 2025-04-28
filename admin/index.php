@@ -1,8 +1,8 @@
 <?php
     session_start();
 
-    require('inc/db_config.php');
-    require('inc/utils.php');
+    require('../inc/db_config.php');
+    require('../inc/utils.php');
 
     if (isset($_SESSION['isAdminLogin']) && $_SESSION['isAdminLogin'] == true) {
         redirect('dashboard.php');
@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-    <?php require('inc/link.php'); ?>
+    <?php require('../inc/link.php'); ?>
     <link rel="stylesheet" href="./css/common.css">
     <style>
     .custom-alert {

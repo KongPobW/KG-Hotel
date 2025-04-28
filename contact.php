@@ -20,11 +20,13 @@ class Contact {
         $query = "INSERT INTO user_contact (name, email, subject, message, date) VALUES (:name, :email, :subject, :message, :date)";
         $stmt = $this->conn->prepare($query);
 
+        $date = date('Y-m-d');
+
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':subject', $subject);
         $stmt->bindParam(':message', $message);
-        $stmt->bindParam(':date', date('Y-m-d'));
+        $stmt->bindParam(':date', $date);
 
         if ($stmt->execute()) {
             return true;
@@ -68,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>KG Hotel - Contact Us</title>
     <?php require('inc/link.php'); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -118,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php 
                     if (isset($success_msg)) { 
                         alert('success', $success_msg);
-                    } else {
+                    } else if (isset($error_msg)) {
                         alert('danger', $error_msg);
                     }
                     ?>

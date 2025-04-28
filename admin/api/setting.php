@@ -1,6 +1,6 @@
 <?php
-require('../inc/db_config.php');
-require('../inc/utils.php');
+require('../../inc/db_config.php');
+require('../../inc/utils.php');
 
 if (isset($_POST['get_general'])) {
     $stmt = $conn->prepare("SELECT * FROM setting WHERE sr_no = 1");

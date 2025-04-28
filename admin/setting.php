@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Setting</title>
-    <?php require('inc/link.php'); ?>
+    <?php require('../inc/link.php'); ?>
     <link rel="stylesheet" href="./css/common.css">
     <style>
     .custom-alert {

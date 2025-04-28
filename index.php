@@ -7,6 +7,7 @@
     <title>KG Hotel - Home</title>
     <?php require('inc/link.php'); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
