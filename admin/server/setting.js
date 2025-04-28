@@ -21,7 +21,9 @@ function getGeneralSetting() {
 
 window.addEventListener('DOMContentLoaded', getGeneralSetting);
 
-function updateGeneralSetting() {
+function updateGeneralSetting(e) {
+    e.preventDefault();
+
     const siteTitle = document.getElementById('site_title_input').value.trim();
     const siteAbout = document.getElementById('site_about_input').value.trim();
 
@@ -64,7 +66,9 @@ function getShutdownSetting() {
 
 window.addEventListener('DOMContentLoaded', getShutdownSetting);
 
-function updateShutdownSetting(shutdownStatus) {
+function updateShutdownSetting(shutdownStatus, e) {
+    e.preventDefault();
+
     const formData = new FormData();
     formData.append('update_shutdown', true);
     formData.append('shutdown_mode', shutdownStatus);
@@ -86,8 +90,8 @@ function updateShutdownSetting(shutdownStatus) {
         });
 }
 
-document.getElementById('shutdown-toggle').addEventListener('change', function () {
-    updateShutdownSetting(this.checked ? '1' : '0');
+document.getElementById('shutdown-toggle').addEventListener('change', function (e) {
+    updateShutdownSetting(this.checked ? '1' : '0', e);
 });
 
 function getContactSetting() {
@@ -124,7 +128,9 @@ function getContactSetting() {
 
 window.addEventListener('DOMContentLoaded', getContactSetting);
 
-function updateContactSetting() {
+function updateContactSetting(e) {
+    e.preventDefault();
+
     const gmap = document.getElementById('google_map_input').value.trim();
     const address = document.getElementById('address_input').value.trim();
     const pn1 = document.getElementById('pn1_input').value.trim();

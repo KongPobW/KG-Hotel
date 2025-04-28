@@ -78,8 +78,8 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal"
                                         onclick="getGeneralSetting()">CANCEL</button>
-                                    <button type="submit" class="btn custom-bg text-white shadow-none"
-                                        onclick="updateGeneralSetting()">SUBMIT</button>
+                                        <button type="submit" class="btn custom-bg text-white shadow-none"
+                                        onclick="updateGeneralSetting(event)">SUBMIT</button>
                                 </div>
                             </div>
                         </form>
@@ -185,7 +185,7 @@
                                     <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal"
                                         onclick="getContactSetting()">CANCEL</button>
                                     <button type="submit" class="btn custom-bg text-white shadow-none"
-                                        onclick="updateContactSetting()">SUBMIT</button>
+                                        onclick="updateContactSetting(event)">SUBMIT</button>
                                 </div>
                             </div>
                         </form>
