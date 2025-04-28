@@ -37,7 +37,7 @@ function updateGeneralSetting() {
         .then(res => res.text())
         .then(data => {
             if (data === '1') {
-                alert('success', 'Updated successfully!');
+                alert('success', 'General setting updated successfully!');
                 getGeneralSetting();
                 const modal = bootstrap.Modal.getInstance(document.getElementById('general-setting'));
                 modal.hide();
@@ -46,7 +46,7 @@ function updateGeneralSetting() {
             }
         })
         .catch(err => {
-            console.error('Error updating setting:', err);
+            console.error('Error updating general setting:', err);
         });
 }
 
@@ -62,7 +62,7 @@ function updateShutdownSetting(shutdownStatus) {
         .then(res => res.text())
         .then(data => {
             if (data === '1') {
-                alert('success', 'Shutdown updated successfully!');
+                alert('success', 'Shutdown setting updated successfully!');
             } else {
                 alert('danger', 'Update failed! Please try again');
             }
@@ -73,5 +73,74 @@ function updateShutdownSetting(shutdownStatus) {
 }
 
 document.getElementById('shutdown-toggle').addEventListener('change', function () {
-    updateShutdownSetting(this.checked ? '1' : '0');  // Pass '1' if checked, '0' if unchecked
+    updateShutdownSetting(this.checked ? '1' : '0');
 });
+
+function getContactSetting() {
+    const formData = new FormData();
+    formData.append('get_contact', true);
+
+    fetch('ajax/setting_crud.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                console.error(data.error);
+                return;
+            }
+
+            document.getElementById('iframe').src = data.gmap || '';
+            document.getElementById('address').innerText = data.address || 'Not set';
+            document.getElementById('pn1').innerText = data.pn1 || 'N/A';
+            document.getElementById('pn2').innerText = data.pn2 || 'N/A';
+            document.getElementById('email').innerText = data.email || 'Not set';
+
+            document.getElementById('google_map_input').value = data.gmap || '';
+            document.getElementById('address_input').value = data.address || '';
+            document.getElementById('pn1_input').value = data.pn1 || '';
+            document.getElementById('pn2_input').value = data.pn2 || '';
+            document.getElementById('email_input').value = data.email || '';
+        })
+        .catch(err => {
+            console.error("Error fetching contact setting:", err);
+        });
+}
+
+window.addEventListener('DOMContentLoaded', getContactSetting);
+
+function updateContactSetting() {
+    const gmap = document.getElementById('google_map_input').value.trim();
+    const address = document.getElementById('address_input').value.trim();
+    const pn1 = document.getElementById('pn1_input').value.trim();
+    const pn2 = document.getElementById('pn2_input').value.trim();
+    const email = document.getElementById('email_input').value.trim();
+
+    const formData = new FormData();
+    formData.append('update_contact', true);
+    formData.append('gmap', gmap);
+    formData.append('address', address);
+    formData.append('pn1', pn1);
+    formData.append('pn2', pn2);
+    formData.append('email', email);
+
+    fetch('ajax/setting_crud.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.text())
+        .then(data => {
+            if (data === '1') {
+                alert('success', 'Contact setting updated successfully!');
+                getContactSetting();
+                const modal = bootstrap.Modal.getInstance(document.getElementById('contact-setting'));
+                modal.hide();
+            } else {
+                alert('danger', 'Failed to update contact setting!');
+            }
+        })
+        .catch(err => {
+            console.error('Error updating contact setting:', err);
+        });
+}

@@ -86,6 +86,98 @@
                             turned on.</p>
                     </div>
                 </div>
+
+                <!-- Contact Detail Section -->
+                <div class="card border-0 shadow mb-3">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h5 class="card-title m-0">Contact Setting</h5>
+                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#contact-setting">
+                                <i class="bi bi-pencil-fill"></i> Edit
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <h6 class="card-subtitle mb-1 fw-bold">Google Map</h6>
+                                    <iframe class="border p-2 w-100" loading="lazy" id="iframe"></iframe>
+                                </div>
+                                <div class="mb-4">
+                                    <h6 class="card-subtitle mb-1 fw-bold">Address</h6>
+                                    <p class="card-text mb-1">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        <span id="address"></span>
+                                    </p>
+                                </div>
+                                <div class="mb-4">
+                                    <h6 class="card-subtitle mb-1 fw-bold">Phone Number</h6>
+                                    <p class="card-text mb-1">
+                                        <i class="bi bi-telephone-fill"></i>
+                                        <span id="pn1"></span>
+                                    </p>
+                                    <p class="card-text mb-1">
+                                        <i class="bi bi-telephone-fill"></i>
+                                        <span id="pn2"></span>
+                                    </p>
+                                </div>
+                                <div class="mb-4">
+                                    <h6 class="card-subtitle mb-1 fw-bold">Email</h6>
+                                    <p class="card-text">
+                                        <i class="bi bi-envelope-fill"></i>
+                                        <span id="email"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Detail Modal -->
+                <div class="modal fade" id="contact-setting" data-bs-backdrop="static" data-bs-keyboard="true"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Contact Setting</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Google Map Link</label>
+                                        <input type="text" name="gmap" id="google_map_input"
+                                            class="form-control shadow-none" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Address</label>
+                                        <input type="text" name="address" id="address_input"
+                                            class="form-control shadow-none" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Phone Number 1</label>
+                                        <input type="text" name="pn1" id="pn1_input" class="form-control shadow-none"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Phone Number 2</label>
+                                        <input type="text" name="pn2" id="pn2_input" class="form-control shadow-none">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" name="email" id="email_input"
+                                            class="form-control shadow-none" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal"
+                                        onclick="getContactSetting()">CANCEL</button>
+                                    <button type="submit" class="btn custom-bg text-white shadow-none"
+                                        onclick="updateContactSetting()">SUBMIT</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
