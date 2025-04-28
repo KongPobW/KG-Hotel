@@ -50,6 +50,20 @@ function updateGeneralSetting() {
         });
 }
 
+function getShutdownSetting() {
+    fetch('ajax/setting_crud.php?get_shutdown=1')
+        .then(res => res.text())
+        .then(data => {
+            const shutdownToggle = document.getElementById('shutdown-toggle');
+            shutdownToggle.checked = data === '1';
+        })
+        .catch(err => {
+            console.error('Error fetching shutdown setting:', err);
+        });
+}
+
+window.addEventListener('DOMContentLoaded', getShutdownSetting);
+
 function updateShutdownSetting(shutdownStatus) {
     const formData = new FormData();
     formData.append('update_shutdown', true);

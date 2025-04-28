@@ -24,6 +24,13 @@ if (isset($_POST['update_general'])) {
     echo $result ? '1' : '0';
 }
 
+if (isset($_GET['get_shutdown'])) {
+    $query = $conn->query("SELECT shutdown FROM setting WHERE sr_no = 1");
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+
+    echo $row['shutdown'];
+}
+
 if (isset($_POST['update_shutdown'])) {
     $shutdown_mode = $_POST['shutdown_mode'] == '1' ? 1 : 0;
 
