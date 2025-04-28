@@ -14,8 +14,17 @@
         right: 25px;
     }
 
-    #dashboard-menu {
+    #admin-menu {
+        position: fixed;
+        height: 100%;
         z-index: 1;
+    }
+
+    @media screen and (max-width: 992px) {
+        #admin-menu {
+            height: auto;
+            width: 100%;
+        }
     }
     </style>
 </head>

@@ -24,6 +24,19 @@
         top: 25px;
         right: 25px;
     }
+
+    #admin-menu {
+        position: fixed;
+        height: 100%;
+        z-index: 1;
+    }
+
+    @media screen and (max-width: 992px) {
+        #admin-menu {
+            height: auto;
+            width: 100%;
+        }
+    }
     </style>
 </head>
 
