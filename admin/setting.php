@@ -188,7 +188,7 @@
 
     <?php require('inc/script.php'); ?>
 
-    <script src="mdb/general_setting.js"></script>
+    <script src="server/setting.js"></script>
 </body>
 
 </html>
