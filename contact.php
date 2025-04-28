@@ -1,3 +1,36 @@
+<?php
+require 'inc/db_config.php';
+
+class Contact {
+    private $conn;
+
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    public function getContactInfo() {
+        $query = "SELECT * FROM contact_details WHERE sr_no = 1";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+}
+
+$database = new Database();
+$db = $database->getConnection();
+
+$contact = new Contact($db);
+
+$contact_info = $contact->getContactInfo();
+
+$address = $contact_info['address'];
+$pn1 = $contact_info['pn1'];
+$pn2 = $contact_info['pn2'];
+$email = $contact_info['email'];
+$gmap = $contact_info['gmap'];
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -22,34 +55,32 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 mb-5 px-4">
                 <div class="bg-white rounded shadow p-4">
-                    <iframe class="w-100 rounded mb-4"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62008.63935942644!2d100.45646024863278!3d13.746279299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29ecd81421b2b%3A0xa1affc34a5f5632c!2z4Liq4Lii4Liy4Lih4LmA4LiL4LmH4LiZ4LmA4LiV4Lit4Lij4LmM!5e0!3m2!1sth!2sth!4v1745384321051!5m2!1sth!2sth"
-                        height="320" loading="lazy"></iframe>
+                    <iframe class="w-100 rounded mb-4" src="<?php echo htmlspecialchars($gmap); ?>" height="320"
+                        loading="lazy"></iframe>
                     <h5>Address</h5>
                     <div class="d-flex gap-2">
                         <i class="bi bi-geo-alt-fill"></i>
-                        <a href="https://maps.app.goo.gl/TiLVzfpf22P7JFmS9" target="_blank"
-                            class="d-inline-block mb-2 text-decoration-none text-dark">979 Rama I Rd., Pathumwan,
-                            Pathumwan, Bangkok 10330</a>
+                        <span
+                            class="d-inline-block mb-2 text-decoration-none text-dark"><?php echo htmlspecialchars($address); ?></span>
                     </div>
                     <h5 class="mt-3">Call Us</h5>
                     <div class="col gap-2">
                         <div class="d-flex gap-2">
                             <i class="bi bi-telephone-fill"></i>
-                            <a href="tel:0982592063"
-                                class="d-inline-block mb-2 text-decoration-none text-dark">0982592063</a>
+                            <a href="tel:<?php echo htmlspecialchars($pn1); ?>"
+                                class="d-inline-block mb-2 text-decoration-none text-dark"><?php echo htmlspecialchars($pn1); ?></a>
                         </div>
                         <div class="d-flex gap-2">
                             <i class="bi bi-telephone-fill"></i>
-                            <a href="tel:0927684756"
-                                class="d-inline-block mb-2 text-decoration-none text-dark">0927684756</a>
+                            <a href="tel:<?php echo htmlspecialchars($pn2); ?>"
+                                class="d-inline-block mb-2 text-decoration-none text-dark"><?php echo htmlspecialchars($pn2); ?></a>
                         </div>
                     </div>
                     <h5 class="mt-3">Email</h5>
                     <div class="d-flex gap-2">
                         <i class="bi bi-envelope-fill"></i>
-                        <a href="mailto:kghotel@gmail.com"
-                            class="d-inline-block mb-2 text-decoration-none text-dark text-wrap">kghotel@gmail.com</a>
+                        <a href="mailto:<?php echo htmlspecialchars($email); ?>"
+                            class="d-inline-block mb-2 text-decoration-none text-dark text-wrap"><?php echo htmlspecialchars($email); ?></a>
                     </div>
                 </div>
             </div>
