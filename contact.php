@@ -15,13 +15,28 @@ class Contact {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function insertMessage($name, $email, $subject, $message) {
+        $query = "INSERT INTO user_contact (name, email, subject, message, date) VALUES (:name, :email, :subject, :message, :date)";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':subject', $subject);
+        $stmt->bindParam(':message', $message);
+        $stmt->bindParam(':date', date('Y-m-d'));
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
 }
 
 $database = new Database();
 $db = $database->getConnection();
 
 $contact = new Contact($db);
-
 $contact_info = $contact->getContactInfo();
 
 $address = $contact_info['address'];
@@ -29,6 +44,19 @@ $pn1 = $contact_info['pn1'];
 $pn2 = $contact_info['pn2'];
 $email = $contact_info['email'];
 $gmap = $contact_info['gmap'];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = htmlspecialchars($_POST['name']);
+    $email_input = htmlspecialchars($_POST['email']);
+    $subject = htmlspecialchars($_POST['subject']);
+    $message = htmlspecialchars($_POST['message']);
+
+    if ($contact->insertMessage($name, $email_input, $subject, $message)) {
+        $success_msg = "Your message has been sent successfully!";
+    } else {
+        $error_msg = "There was an error sending your message! Please try again";
+    }
+}
 ?>
 
 <!doctype html>
@@ -45,6 +73,7 @@ $gmap = $contact_info['gmap'];
 <body>
     <?php require('inc/header.php'); ?>
     <?php require('inc/modal.php'); ?>
+    <?php require('inc/utils.php'); ?>
 
     <div class="my-5 px-4">
         <h2 class="fw-bold h-font text-center">CONTACT US</h2>
@@ -86,23 +115,31 @@ $gmap = $contact_info['gmap'];
             </div>
             <div class="col-lg-6 col-md-6 mb-5 px-4">
                 <div class="bg-white rounded shadow p-4">
-                    <form action="">
+                    <?php 
+                    if (isset($success_msg)) { 
+                        alert('success', $success_msg);
+                    } else {
+                        alert('danger', $error_msg);
+                    }
+                    ?>
+                    <form method="POST">
                         <h5 class="fw-bold">Send Message</h5>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Name</label>
-                            <input type="text" class="form-control shadow-none">
+                            <input type="text" name="name" class="form-control shadow-none" required>
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Email</label>
-                            <input type="email" class="form-control shadow-none">
+                            <input type="email" name="email" class="form-control shadow-none" required>
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Subject</label>
-                            <input type="text" class="form-control shadow-none">
+                            <input type="text" name="subject" class="form-control shadow-none" required>
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Message</label>
-                            <textarea class="form-control shadow-none" rows="5" style="resize: none;"></textarea>
+                            <textarea name="message" class="form-control shadow-none" rows="5" style="resize: none;"
+                                required></textarea>
                         </div>
                         <button type="submit" class="btn text-white custom-bg mt-3">SUBMIT</button>
                     </form>
