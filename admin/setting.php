@@ -13,6 +13,10 @@
         top: 80px;
         right: 25px;
     }
+
+    #dashboard-menu {
+        z-index: 1;
+    }
     </style>
 </head>
 
