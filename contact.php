@@ -1,6 +1,7 @@
 <?php 
 require('inc/db_config.php');
-require('class/contact.php'); 
+require('admin/class/contact_detail.php');
+require('admin/class/user_contact.php');
 ?>
 
 <!doctype html>

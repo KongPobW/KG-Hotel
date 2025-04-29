@@ -16,22 +16,22 @@ function getAllMessages() {
             const messageTableBody = document.querySelector('tbody');
             messageTableBody.innerHTML = '';
 
-            data.forEach(message => {
+            data.forEach((message, index) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                <td>${message.sr_no}</td>
-                <td>${message.name}</td>
-                <td>${message.email}</td>
-                <td>${message.subject}</td>
-                <td>${message.message}</td>
-                <td>${message.date}</td>
-                <td>
-                    ${message.seen == 0
+                    <td>${index + 1}</td>
+                    <td>${message.name}</td>
+                    <td>${message.email}</td>
+                    <td>${message.subject}</td>
+                    <td>${message.message}</td>
+                    <td>${message.date}</td>
+                    <td>
+                        ${message.seen == 0
                         ? `<button class="btn btn-sm btn-success mark-read" data-id="${message.sr_no}">Mark as Read</button>`
                         : `<button class="btn btn-sm btn-secondary" disabled>Read</button>`
                     }
-                </td>
-            `;
+                    </td>
+                `;
                 messageTableBody.appendChild(tr);
             });
 
