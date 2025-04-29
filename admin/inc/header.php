@@ -18,7 +18,8 @@
                         <a class="nav-link text-light" href="dashboard.php" id="dashboard-link">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#" id="rooms-link">Rooms</a>
+                        <a class="nav-link text-light" href="feature_facility.php"
+                            id="features-facilities-link">Features & Facilities</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="user_contact.php" id="user-contacts-link">User Contacts</a>
@@ -41,8 +42,8 @@ window.onload = function() {
             path: '/dashboard.php'
         },
         {
-            id: 'rooms-link',
-            path: '/#'
+            id: 'features-facilities-link',
+            path: '/feature_facility.php'
         },
         {
             id: 'user-contacts-link',
