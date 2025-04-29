@@ -11,7 +11,7 @@ function getFeatures() {
     })
         .then(res => res.json())
         .then(data => {
-            const tbody = document.querySelector('tbody');
+            const tbody = document.querySelector('.tbody-feature');
             tbody.innerHTML = '';
 
             if (Array.isArray(data) && data.length > 0) {
@@ -52,7 +52,7 @@ function addFeature(e) {
             if (data === '1') {
                 alert('success', 'Feature added successfully!');
                 nameInput.value = '';
-                bootstrap.Modal.getInstance(document.getElementById('feature-setting')).hide();
+                bootstrap.Modal.getInstance(document.getElementById('feature-adding')).hide();
                 getFeatures();
             } else {
                 alert('danger', 'Failed to add feature! Please try again');
