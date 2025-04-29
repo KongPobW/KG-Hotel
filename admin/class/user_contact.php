@@ -23,16 +23,6 @@ class UserContact {
         }
         return false;
     }
-
-    public function getMessages() {
-        $query = "SELECT * FROM user_contact ORDER BY date DESC";
-        $stmt = $this->conn->prepare($query);
-        
-        if ($stmt->execute()) {
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-        return [];
-    }
 }
 
 $database = new Database();
