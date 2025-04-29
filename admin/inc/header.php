@@ -3,7 +3,7 @@
     <a href="logout.php" class="btn btn-light btn-sm">LOG OUT</a>
 </div>
 
-<div class="col-lg-2 bg-dark border border-top border-3 border-secondary" id="dashboard-menu">
+<div class="col-lg-2 bg-dark border border-top border-3 border-secondary" id="admin-menu">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid flex-lg-column align-items-stretch">
             <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
@@ -21,7 +21,7 @@
                         <a class="nav-link text-light" href="#" id="rooms-link">Rooms</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#" id="users-link">Users</a>
+                        <a class="nav-link text-light" href="user_contact.php" id="user-contacts-link">User Contacts</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="setting.php" id="setting-link">Setting</a>
@@ -45,8 +45,8 @@ window.onload = function() {
             path: '/#'
         },
         {
-            id: 'users-link',
-            path: '/#'
+            id: 'user-contacts-link',
+            path: '/user_contact.php'
         },
         {
             id: 'setting-link',
