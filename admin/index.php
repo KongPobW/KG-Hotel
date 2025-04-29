@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    require('../inc/db_config.php');
+    require('inc/db_config.php');
     require('../inc/utils.php');
 
     if (isset($_SESSION['isAdminLogin']) && $_SESSION['isAdminLogin'] == true) {

@@ -1,5 +1,5 @@
 <?php
-require('../../inc/db_config.php');
+require('../inc/db_config.php');
 require('../../inc/utils.php');
 
 if (isset($_POST['get_general'])) {
