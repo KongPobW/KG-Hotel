@@ -1,3 +1,8 @@
+<?php
+require('admin/inc/db_config.php');
+require('admin/class/facility.php');
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -29,61 +34,20 @@
 
     <div class="container">
         <div class="row">
+            <?php
+      foreach ($facilities as $row):
+      ?>
             <div class="col-lg-4 col-md-6 mb-5 px-4">
                 <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
                     <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/wifi.svg" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
+                        <img src="admin/uploads/facilities/<?php echo htmlspecialchars($row['icon']); ?>" width="40px"
+                            alt="icon">
+                        <h5 class="m-0 ms-3"><?php echo htmlspecialchars($row['name']); ?></h5>
                     </div>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci magni accusantium
-                        dolore esse quibusdam! Voluptate qui consectetur quidem culpa sequi doloribus impedit vitae
-                        officiis? Qui cumque expedita eius magni?</p>
+                    <p><?php echo htmlspecialchars($row['description']); ?></p>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/water-heater.svg" width="40px">
-                        <h5 class="m-0 ms-3">Water Heater</h5>
-                    </div>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci magni accusantium
-                        dolore esse quibusdam! Voluptate qui consectetur quidem culpa sequi doloribus impedit vitae
-                        officiis? Qui cumque expedita eius magni?</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/tv.svg" width="40px">
-                        <h5 class="m-0 ms-3">Television</h5>
-                    </div>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci magni accusantium
-                        dolore esse quibusdam! Voluptate qui consectetur quidem culpa sequi doloribus impedit vitae
-                        officiis? Qui cumque expedita eius magni?</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/air-heater.svg" width="40px">
-                        <h5 class="m-0 ms-3">Air Heater</h5>
-                    </div>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci magni accusantium
-                        dolore esse quibusdam! Voluptate qui consectetur quidem culpa sequi doloribus impedit vitae
-                        officiis? Qui cumque expedita eius magni?</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/ac.svg" width="40px">
-                        <h5 class="m-0 ms-3">Air Conditioner</h5>
-                    </div>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci magni accusantium
-                        dolore esse quibusdam! Voluptate qui consectetur quidem culpa sequi doloribus impedit vitae
-                        officiis? Qui cumque expedita eius magni?</p>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
