@@ -1,5 +1,5 @@
 <?php 
-require('inc/db_config.php');
+require('admin/inc/db_config.php');
 require('admin/class/contact_detail.php');
 require('admin/class/user_contact.php');
 ?>
