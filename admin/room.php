@@ -56,13 +56,13 @@ require('class/facility.php');
                                     <tr style="background-color: black !important; color: white !important;">
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Area</th>
-                                        <th scope="col">Guests</th>
-                                        <th scope="col">Price</th>
+                                        <th scope="col" width="10%">Area</th>
+                                        <th scope="col" width="15%">Guests</th>
+                                        <th scope="col" width="5%">Price(฿)</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Features</th>
                                         <th scope="col">Facilities</th>
-                                        <th scope="col" width="10%">Status</th>
+                                        <th scope="col" width="5%">Status</th>
                                         <th scope="col" width="15%">Action</th>
                                     </tr>
                                 </thead>
@@ -92,12 +92,12 @@ require('class/facility.php');
                                     required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Area</label>
+                                <label class="form-label">Area (sqft)</label>
                                 <input type="text" name="area" id="area_input_add" class="form-control shadow-none"
                                     required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Price</label>
+                                <label class="form-label">Price (฿)</label>
                                 <input type="text" name="price" id="price_input_add" class="form-control shadow-none"
                                     required>
                             </div>
@@ -186,12 +186,12 @@ require('class/facility.php');
                                     class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Area</label>
+                                <label class="form-label">Area (sqft)</label>
                                 <input type="text" name="area" id="area_input_edit" class="form-control shadow-none"
                                     required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Price</label>
+                                <label class="form-label">Price (฿)</label>
                                 <input type="text" name="price" id="price_input_edit" class="form-control shadow-none"
                                     required>
                             </div>
