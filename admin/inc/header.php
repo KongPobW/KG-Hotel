@@ -18,6 +18,9 @@
                         <a class="nav-link text-light" href="dashboard.php" id="dashboard-link">Dashboard</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-light" href="room.php" id="rooms-link">Rooms</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" href="feature_facility.php"
                             id="features-facilities-link">Features & Facilities</a>
                     </li>
@@ -40,6 +43,10 @@ window.onload = function() {
     let menuItems = [{
             id: 'dashboard-link',
             path: '/dashboard.php'
+        },
+        {
+            id: 'rooms-link',
+            path: '/room.php'
         },
         {
             id: 'features-facilities-link',
