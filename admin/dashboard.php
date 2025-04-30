@@ -7,6 +7,20 @@
     <title>Admin - Dashboard</title>
     <?php require('../inc/link.php'); ?>
     <link rel="stylesheet" href="./css/style.css">
+    <style>
+    #admin-menu {
+        position: fixed;
+        height: 100%;
+        z-index: 2;
+    }
+
+    @media screen and (max-width: 992px) {
+        #admin-menu {
+            height: auto;
+            width: 100%;
+        }
+    }
+    </style>
 </head>
 
 <body class="bg-light">
