@@ -155,8 +155,18 @@ if (isset($_POST['upload_room_image_thumb'])) {
         $allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
 
         if (move_uploaded_file($thumb['tmp_name'], $thumbUploadPath)) {
-            $query = $conn->prepare("INSERT INTO room_thumb (id_room, thumb) VALUES (?, ?)");
-            $query->execute([$room_id, $thumbName]);
+            $existingThumbStmt = $conn->prepare("SELECT thumb FROM room_thumb WHERE id_room = ?");
+            $existingThumbStmt->execute([$room_id]);
+            $existingThumb = $existingThumbStmt->fetchColumn();
+
+            if ($existingThumb) {
+                unlink($thumbUploadDir . $existingThumb);
+                $updateQuery = $conn->prepare("UPDATE room_thumb SET thumb = ? WHERE id_room = ?");
+                $updateQuery->execute([$thumbName, $room_id]);
+            } else {
+                $query = $conn->prepare("INSERT INTO room_thumb (id_room, thumb) VALUES (?, ?)");
+                $query->execute([$room_id, $thumbName]);
+            }
         } else {
             echo 'thumb_upload_failed';
             exit;
