@@ -140,4 +140,65 @@ if (isset($_POST['update_room'])) {
         echo 0;
     }
 }
+
+if (isset($_POST['upload_room_image_thumb'])) {
+    $room_id = $_POST['room_id'];
+
+    if (isset($_FILES['room_thumb']) && $_FILES['room_thumb']['error'] === UPLOAD_ERR_OK) {
+        $thumb = $_FILES['room_thumb'];
+        $thumbName = 'thumb_' . time() . '_' . basename($thumb['name']);
+        $thumbUploadDir = '../uploads/rooms/thumbs/';
+        $thumbUploadPath = $thumbUploadDir . $thumbName;
+
+        $thumbExt = strtolower(pathinfo($thumbName, PATHINFO_EXTENSION));
+        $allowedExt = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
+        $allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
+
+        if (move_uploaded_file($thumb['tmp_name'], $thumbUploadPath)) {
+            $query = $conn->prepare("INSERT INTO room_thumb (id_room, thumb) VALUES (?, ?)");
+            $query->execute([$room_id, $thumbName]);
+        } else {
+            echo 'thumb_upload_failed';
+            exit;
+        }
+    }
+
+    if (isset($_FILES['room_images']) && count($_FILES['room_images']['name']) > 0) {
+        $allowedExt = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
+        $allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
+
+        foreach ($_FILES['room_images']['name'] as $index => $imageName) {
+            $image = $_FILES['room_images'];
+            $imageTmpName = $image['tmp_name'][$index];
+            $imageNewName = 'image_' . time() . '_' . basename($imageName);
+            $imageUploadDir = '../uploads/rooms/images/';
+            $imageUploadPath = $imageUploadDir . $imageNewName;
+
+            $imageExt = strtolower(pathinfo($imageNewName, PATHINFO_EXTENSION));
+
+            if (move_uploaded_file($imageTmpName, $imageUploadPath)) {
+                $query = $conn->prepare("INSERT INTO room_images (id_room, image) VALUES (?, ?)");
+                $query->execute([$room_id, $imageNewName]);
+            } else {
+                echo 'image_upload_failed';
+                exit;
+            }
+        }
+    }
+
+    echo 1;
+}
+
+if (isset($_POST['get_room_image_thumb'])) {
+    $room_id = $_POST['room_id'];
+
+    $thumbStmt = $conn->prepare("SELECT thumb FROM room_thumb WHERE id_room = ?");
+    $thumbStmt->execute([$room_id]);
+    $thumb = $thumbStmt->fetchColumn();
+    $imagesStmt = $conn->prepare("SELECT image FROM room_images WHERE id_room = ?");
+    $imagesStmt->execute([$room_id]);
+    $images = $imagesStmt->fetchAll(PDO::FETCH_COLUMN);
+
+    echo json_encode(['thumb' => $thumb, 'images' => $images]);
+}
 ?>

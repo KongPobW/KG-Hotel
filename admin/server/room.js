@@ -50,6 +50,10 @@ function addRoom(e) {
 }
 
 function getRooms() {
+    document.getElementById('room_thumb_input').value = '';
+    document.getElementById('room_image_input').value = '';
+    document.getElementById('imagePreviewTable').innerHTML = '';
+
     const formData = new FormData();
     formData.append('get_rooms', true);
 
@@ -82,10 +86,13 @@ function getRooms() {
                             </td>
                             <td>
                                 <button class="btn btn-sm btn-primary me-1" onclick="editRoom(${room.id})">
-                                    <i class="bi bi-pencil-square"></i> Edit
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button class="btn btn-sm btn-info me-1" onclick="addImageAndThumb(${room.id})">
+                                    <i class="bi bi-images"></i>
                                 </button>
                                 <button class="btn btn-sm btn-danger" onclick="deleteRoom(${room.id})">
-                                    <i class="bi bi-trash"></i> Delete
+                                    <i class="bi bi-trash"></i>
                                 </button>
                             </td>
                         </tr>
@@ -244,5 +251,102 @@ function updateRoom(e) {
         })
         .catch(err => {
             console.error('Error updating room:', err);
+        });
+}
+
+CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD = '';
+
+function addImageAndThumb(id) {
+    CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD = id;
+
+    const modal = new bootstrap.Modal(document.getElementById('room-image'));
+    modal.show();
+
+    const formData = new FormData();
+    formData.append('get_room_image_thumb', true);
+    formData.append('room_id', id);
+
+    fetch('api/room.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.json())
+        .then(data => {
+            const imagePreviewTable = document.getElementById('imagePreviewTable');
+            imagePreviewTable.innerHTML = '';
+
+            if (data.thumb) {
+                const thumbRow = `
+                <tr>
+                    <td><img src="uploads/rooms/thumbs/${data.thumb}" alt="Room Thumbnail" style="width: 100px;"></td>
+                    <td></td>
+                </tr>
+            `;
+                imagePreviewTable.insertAdjacentHTML('beforeend', thumbRow);
+            }
+
+            data.images.forEach(image => {
+                const imageRow = `
+                <tr>
+                    <td></td>
+                    <td><img src="uploads/rooms/images/${image}" alt="Room Image" style="width: 100px;"></td>
+                </tr>
+            `;
+                imagePreviewTable.insertAdjacentHTML('beforeend', imageRow);
+            });
+        })
+        .catch(err => {
+            console.error('Error fetching room image and thumb:', err);
+        });
+}
+
+function uploadImageAndThumb(e) {
+    e.preventDefault();
+
+    const thumbInput = document.getElementById('room_thumb_input');
+    const imagesInput = document.getElementById('room_image_input');
+    const roomId = CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD;
+
+    const thumbSelected = thumbInput.files.length > 0;
+    const imagesSelected = imagesInput.files.length > 0;
+
+    if (!thumbSelected && !imagesSelected) {
+        alert('danger', 'Please select a thumbnail or room image to upload');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('upload_room_image_thumb', true);
+    formData.append('room_id', roomId);
+
+    if (thumbSelected) {
+        formData.append('room_thumb', thumbInput.files[0]);
+    }
+
+    if (imagesSelected) {
+        for (let img of imagesInput.files) {
+            formData.append('room_images[]', img);
+        }
+    }
+
+    fetch('api/room.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.text())
+        .then(data => {
+            if (data === '1') {
+                alert('success', 'Uploaded successfully!');
+                bootstrap.Modal.getInstance(document.getElementById('room-image')).hide();
+                getRooms();
+
+                thumbInput.value = '';
+                imagesInput.value = '';
+            } else {
+                alert('danger', 'Failed to upload! Please try again');
+            }
+        })
+        .catch(err => {
+            console.error('Error during upload:', err);
         });
 }

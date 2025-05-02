@@ -263,6 +263,45 @@ require('class/facility.php');
         </div>
     </div>
 
+    <div class="modal fade" id="room-image" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <form>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Room Image</h5>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label">Select Room Thumb</label>
+                        <input type="file" name="room_thumb" id="room_thumb_input" class="form-control shadow-none mb-3"
+                            accept="image/*">
+                        <label class="form-label">Select Room Image(s)</label>
+                        <input type="file" name="room_images[]" id="room_image_input"
+                            class="form-control shadow-none mb-3" accept="image/*" multiple>
+
+                        <table class="table table-bordered mt-3">
+                            <thead>
+                                <tr>
+                                    <th>Thumb</th>
+                                    <th>Image</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="imagePreviewTable">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal"
+                            onclick="getRooms()">CANCEL</button>
+                        <button type="button" class="btn custom-bg text-white shadow-none"
+                            onclick="uploadImageAndThumb(event)">UPLOAD</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <?php require('inc/script.php'); ?>
 
     <script src="server/room.js"></script>
