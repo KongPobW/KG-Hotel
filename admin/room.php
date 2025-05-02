@@ -272,8 +272,8 @@ require('class/facility.php');
                         <h5 class="modal-title">Room Image</h5>
                     </div>
                     <div class="modal-body">
-                        <label class="form-label">Select Room Thumb</label>
-                        <input type="file" name="room_thumb" id="room_thumb_input" class="form-control shadow-none mb-3"
+                        <label class="form-label">Select Room Cover</label>
+                        <input type="file" name="room_cover" id="room_cover_input" class="form-control shadow-none mb-3"
                             accept="image/*">
                         <label class="form-label">Select Room Image(s)</label>
                         <input type="file" name="room_images[]" id="room_image_input"
@@ -282,7 +282,7 @@ require('class/facility.php');
                         <table class="table table-bordered mt-3">
                             <thead>
                                 <tr>
-                                    <th>Thumb</th>
+                                    <th>Cover</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -295,7 +295,7 @@ require('class/facility.php');
                         <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal"
                             onclick="getRooms()">CANCEL</button>
                         <button type="button" class="btn custom-bg text-white shadow-none"
-                            onclick="uploadImageAndThumb(event)">UPLOAD</button>
+                            onclick="uploadImageAndCover(event)">UPLOAD</button>
                     </div>
                 </div>
             </form>

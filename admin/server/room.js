@@ -50,7 +50,7 @@ function addRoom(e) {
 }
 
 function getRooms() {
-    document.getElementById('room_thumb_input').value = '';
+    document.getElementById('room_cover_input').value = '';
     document.getElementById('room_image_input').value = '';
     document.getElementById('imagePreviewTable').innerHTML = '';
 
@@ -88,7 +88,7 @@ function getRooms() {
                                 <button class="btn btn-sm btn-primary me-1" onclick="editRoom(${room.id})">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                <button class="btn btn-sm btn-info me-1" onclick="addImageAndThumb(${room.id})">
+                                <button class="btn btn-sm btn-info me-1" onclick="addImageAndCover(${room.id})">
                                     <i class="bi bi-images"></i>
                                 </button>
                                 <button class="btn btn-sm btn-danger" onclick="deleteRoom(${room.id})">
@@ -256,14 +256,14 @@ function updateRoom(e) {
 
 CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD = '';
 
-function addImageAndThumb(id) {
+function addImageAndCover(id) {
     CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD = id;
 
     const modal = new bootstrap.Modal(document.getElementById('room-image'));
     modal.show();
 
     const formData = new FormData();
-    formData.append('get_room_image_thumb', true);
+    formData.append('get_room_image_cover', true);
     formData.append('room_id', id);
 
     fetch('api/room.php', {
@@ -275,14 +275,14 @@ function addImageAndThumb(id) {
             const imagePreviewTable = document.getElementById('imagePreviewTable');
             imagePreviewTable.innerHTML = '';
 
-            if (data.thumb) {
-                const thumbRow = `
+            if (data.cover) {
+                const coverRow = `
                 <tr>
-                    <td><img src="uploads/rooms/thumbs/${data.thumb}" alt="Room Thumbnail" style="width: 100px;"></td>
+                    <td><img src="uploads/rooms/covers/${data.cover}" alt="Room Cover" style="width: 100px;"></td>
                     <td></td>
                 </tr>
             `;
-                imagePreviewTable.insertAdjacentHTML('beforeend', thumbRow);
+                imagePreviewTable.insertAdjacentHTML('beforeend', coverRow);
             }
 
             data.images.forEach(image => {
@@ -296,31 +296,31 @@ function addImageAndThumb(id) {
             });
         })
         .catch(err => {
-            console.error('Error fetching room image and thumb:', err);
+            console.error('Error fetching room image and cover:', err);
         });
 }
 
-function uploadImageAndThumb(e) {
+function uploadImageAndCover(e) {
     e.preventDefault();
 
-    const thumbInput = document.getElementById('room_thumb_input');
+    const coverInput = document.getElementById('room_cover_input');
     const imagesInput = document.getElementById('room_image_input');
     const roomId = CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD;
 
-    const thumbSelected = thumbInput.files.length > 0;
+    const coverSelected = coverInput.files.length > 0;
     const imagesSelected = imagesInput.files.length > 0;
 
-    if (!thumbSelected && !imagesSelected) {
-        alert('danger', 'Please select a thumbnail or room image to upload');
+    if (!coverSelected && !imagesSelected) {
+        alert('danger', 'Please select a cover or room image to upload');
         return;
     }
 
     const formData = new FormData();
-    formData.append('upload_room_image_thumb', true);
+    formData.append('upload_room_image_cover', true);
     formData.append('room_id', roomId);
 
-    if (thumbSelected) {
-        formData.append('room_thumb', thumbInput.files[0]);
+    if (coverSelected) {
+        formData.append('room_cover', coverInput.files[0]);
     }
 
     if (imagesSelected) {
@@ -340,7 +340,7 @@ function uploadImageAndThumb(e) {
                 bootstrap.Modal.getInstance(document.getElementById('room-image')).hide();
                 getRooms();
 
-                thumbInput.value = '';
+                coverInput.value = '';
                 imagesInput.value = '';
             } else {
                 alert('danger', 'Failed to upload! Please try again');

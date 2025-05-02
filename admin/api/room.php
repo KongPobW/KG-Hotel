@@ -141,34 +141,34 @@ if (isset($_POST['update_room'])) {
     }
 }
 
-if (isset($_POST['upload_room_image_thumb'])) {
+if (isset($_POST['upload_room_image_cover'])) {
     $room_id = $_POST['room_id'];
 
-    if (isset($_FILES['room_thumb']) && $_FILES['room_thumb']['error'] === UPLOAD_ERR_OK) {
-        $thumb = $_FILES['room_thumb'];
-        $thumbName = 'thumb_' . time() . '_' . basename($thumb['name']);
-        $thumbUploadDir = '../uploads/rooms/thumbs/';
-        $thumbUploadPath = $thumbUploadDir . $thumbName;
+    if (isset($_FILES['room_cover']) && $_FILES['room_cover']['error'] === UPLOAD_ERR_OK) {
+        $cover = $_FILES['room_cover'];
+        $coverName = 'cover_' . time() . '_' . basename($cover['name']);
+        $coverUploadDir = '../uploads/rooms/covers/';
+        $coverUploadPath = $coverUploadDir . $coverName;
 
-        $thumbExt = strtolower(pathinfo($thumbName, PATHINFO_EXTENSION));
+        $coverExt = strtolower(pathinfo($coverName, PATHINFO_EXTENSION));
         $allowedExt = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
         $allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
 
-        if (move_uploaded_file($thumb['tmp_name'], $thumbUploadPath)) {
-            $existingThumbStmt = $conn->prepare("SELECT thumb FROM room_thumb WHERE id_room = ?");
-            $existingThumbStmt->execute([$room_id]);
-            $existingThumb = $existingThumbStmt->fetchColumn();
+        if (move_uploaded_file($cover['tmp_name'], $coverUploadPath)) {
+            $existingCoverStmt = $conn->prepare("SELECT cover FROM room_covers WHERE id_room = ?");
+            $existingCoverStmt->execute([$room_id]);
+            $existingCover = $existingCoverStmt->fetchColumn();
 
-            if ($existingThumb) {
-                unlink($thumbUploadDir . $existingThumb);
-                $updateQuery = $conn->prepare("UPDATE room_thumb SET thumb = ? WHERE id_room = ?");
-                $updateQuery->execute([$thumbName, $room_id]);
+            if ($existingCover) {
+                unlink($coverUploadDir . $existingCover);
+                $updateQuery = $conn->prepare("UPDATE room_covers SET cover = ? WHERE id_room = ?");
+                $updateQuery->execute([$coverName, $room_id]);
             } else {
-                $query = $conn->prepare("INSERT INTO room_thumb (id_room, thumb) VALUES (?, ?)");
-                $query->execute([$room_id, $thumbName]);
+                $query = $conn->prepare("INSERT INTO room_covers (id_room, cover) VALUES (?, ?)");
+                $query->execute([$room_id, $coverName]);
             }
         } else {
-            echo 'thumb_upload_failed';
+            echo 'cover_upload_failed';
             exit;
         }
     }
@@ -199,16 +199,16 @@ if (isset($_POST['upload_room_image_thumb'])) {
     echo 1;
 }
 
-if (isset($_POST['get_room_image_thumb'])) {
+if (isset($_POST['get_room_image_cover'])) {
     $room_id = $_POST['room_id'];
 
-    $thumbStmt = $conn->prepare("SELECT thumb FROM room_thumb WHERE id_room = ?");
-    $thumbStmt->execute([$room_id]);
-    $thumb = $thumbStmt->fetchColumn();
+    $coverStmt = $conn->prepare("SELECT cover FROM room_covers WHERE id_room = ?");
+    $coverStmt->execute([$room_id]);
+    $cover = $coverStmt->fetchColumn();
     $imagesStmt = $conn->prepare("SELECT image FROM room_images WHERE id_room = ?");
     $imagesStmt->execute([$room_id]);
     $images = $imagesStmt->fetchAll(PDO::FETCH_COLUMN);
 
-    echo json_encode(['thumb' => $thumb, 'images' => $images]);
+    echo json_encode(['cover' => $cover, 'images' => $images]);
 }
 ?>
