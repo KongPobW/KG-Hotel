@@ -118,7 +118,7 @@ require('admin/class/room.php');
                                 foreach ($features as $feature):
                                 ?>
                                 <span
-                                    class="badge rounded-pill text-bg-light text-wrap lh-base"><?php echo $feature; ?></span>
+                                    class="badge rounded-pill text-bg-light text-wrap lh-base mt-2"><?php echo $feature; ?></span>
                                 <?php endforeach; ?>
                             </div>
                             <div class="facilities mb-3">
@@ -128,29 +128,31 @@ require('admin/class/room.php');
                                 foreach ($facilities as $facility):
                                 ?>
                                 <span
-                                    class="badge rounded-pill text-bg-light text-wrap lh-base"><?php echo $facility; ?></span>
+                                    class="badge rounded-pill text-bg-light text-wrap lh-base mt-2"><?php echo $facility; ?></span>
                                 <?php endforeach; ?>
                             </div>
                             <div class="guests">
                                 <h6 class="mb-1">Guests</h6>
                                 <span
-                                    class="badge rounded-pill text-bg-light text-wrap lh-base"><?php echo $room['adult']; ?>Adults</span>
+                                    class="badge rounded-pill text-bg-light text-wrap lh-base mt-2"><?php echo $room['adult']; ?>
+                                    Adults</span>
                                 <span
-                                    class="badge rounded-pill text-bg-light text-wrap lh-base"><?php echo $room['children']; ?>Children</span>
+                                    class="badge rounded-pill text-bg-light text-wrap lh-base mt-2"><?php echo $room['children']; ?>
+                                    Children</span>
                             </div>
                         </div>
                         <div class="col-md-2 text-center">
-                            <h6 class="my-4 mt-lg-0 mt-md-0">฿<?php echo number_format($room['price'], 2); ?> per night
+                            <h6 class="my-4 mt-lg-0 mt-md-0">฿<?php echo number_format($room['price'], 0); ?> per night
                             </h6>
                             <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
-                            <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>
+                            <a href="room_detail.php?id=<?php echo $room['id']; ?>"
+                                class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>
                         </div>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
         </div>
-    </div>
     </div>
 
     <?php require('inc/footer.php'); ?>
