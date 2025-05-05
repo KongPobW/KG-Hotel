@@ -280,6 +280,9 @@ function addImageAndCover(id) {
                 <tr>
                     <td><img src="uploads/rooms/covers/${data.cover}" alt="Room Cover" style="width: 100px;"></td>
                     <td></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteRoomImageAndCover('${data.cover}', true)">Delete</button>
+                    </td>
                 </tr>
             `;
                 imagePreviewTable.insertAdjacentHTML('beforeend', coverRow);
@@ -290,6 +293,9 @@ function addImageAndCover(id) {
                 <tr>
                     <td></td>
                     <td><img src="uploads/rooms/images/${image}" alt="Room Image" style="width: 100px;"></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteRoomImageAndCover('${image}', false)">Delete</button>
+                    </td>
                 </tr>
             `;
                 imagePreviewTable.insertAdjacentHTML('beforeend', imageRow);
@@ -348,5 +354,30 @@ function uploadImageAndCover(e) {
         })
         .catch(err => {
             console.error('Error during upload:', err);
+        });
+}
+
+function deleteRoomImageAndCover(filename, isCover) {
+    const formData = new FormData();
+    formData.append('delete_room_image_cover', true);
+    formData.append('room_id', CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD);
+    formData.append('filename', filename);
+    formData.append('is_cover', isCover);
+
+    fetch('api/room.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                alert('success', 'Deleted successfully!');
+                addImageAndCover(CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD);
+            } else {
+                alert('danger', 'Failed to delete! Please try again');
+            }
+        })
+        .catch(err => {
+            console.error('Error during delete:', err);
         });
 }

@@ -68,8 +68,30 @@ if (isset($_POST['get_rooms'])) {
 if (isset($_POST['delete_room'])) {
     $id = $_POST['id'];
 
-    $conn->prepare("DELETE FROM room_features WHERE id_room = ?")->execute([$id]);
-    $conn->prepare("DELETE FROM room_facilities WHERE id_room = ?")->execute([$id]);
+    $coverStmt = $conn->prepare("SELECT cover FROM room_covers WHERE id_room = ?");
+    $coverStmt->execute([$id]);
+    $cover = $coverStmt->fetchColumn();
+
+    if ($cover) {
+        $coverPath = "../uploads/rooms/covers/" . $cover;
+        if (file_exists($coverPath)) {
+            unlink($coverPath);
+        }
+    }
+
+    $imagesStmt = $conn->prepare("SELECT image FROM room_images WHERE id_room = ?");
+    $imagesStmt->execute([$id]);
+    $images = $imagesStmt->fetchAll(PDO::FETCH_COLUMN);
+
+    if ($images) {
+        foreach ($images as $image) {
+            $imagePath = "../uploads/rooms/images/" . $image;
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+    }
+
     $res = $conn->prepare("DELETE FROM room WHERE id = ?")->execute([$id]);
 
     echo $res ? 1 : 0;
@@ -210,5 +232,35 @@ if (isset($_POST['get_room_image_cover'])) {
     $images = $imagesStmt->fetchAll(PDO::FETCH_COLUMN);
 
     echo json_encode(['cover' => $cover, 'images' => $images]);
+}
+
+if (isset($_POST['delete_room_image_cover'])) {
+    $room_id = $_POST['room_id'];
+    $filename = $_POST['filename'];
+    $is_cover = filter_var($_POST['is_cover'], FILTER_VALIDATE_BOOLEAN);
+
+    if ($is_cover) {
+        $filePath = "../uploads/rooms/covers/" . $filename;
+
+        if (file_exists($filePath) && unlink($filePath)) {
+            $stmt = $conn->prepare("DELETE FROM room_covers WHERE id_room = ? AND cover = ?");
+            $res = $stmt->execute([$room_id, $filename]);
+
+            echo json_encode(['success' => $res]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'File not found or failed to delete']);
+        }
+    } else {
+        $filePath = "../uploads/rooms/images/" . $filename;
+
+        if (file_exists($filePath) && unlink($filePath)) {
+            $stmt = $conn->prepare("DELETE FROM room_images WHERE id_room = ? AND image = ?");
+            $res = $stmt->execute([$room_id, $filename]);
+
+            echo json_encode(['success' => $res]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'File not found or failed to delete']);
+        }
+    }
 }
 ?>
