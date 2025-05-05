@@ -36,11 +36,6 @@ if (isset($_POST['add_facility'])) {
         exit;
     }
 
-    if ($img['size'] > 2 * 1024 * 1024) {
-        echo 'large_image';
-        exit;
-    }
-
     if (move_uploaded_file($img['tmp_name'], $img_path)) {
         $stmt = $conn->prepare("INSERT INTO facilities (name, description, icon) VALUES (?, ?, ?)");
         $res = $stmt->execute([$name, $desc, $img_name]);
