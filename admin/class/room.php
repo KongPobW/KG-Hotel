@@ -1,0 +1,35 @@
+<?php
+class Room {
+    private $conn;
+
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    public function getRooms() {
+        $query = "
+            SELECT r.id, r.name, r.area, r.price, r.quant, r.adult, r.children, r.description, 
+                   rc.cover,
+                   GROUP_CONCAT(DISTINCT f.name) AS features,
+                   GROUP_CONCAT(DISTINCT fc.name) AS facilities
+            FROM room r
+            LEFT JOIN room_covers rc ON r.id = rc.id_room
+            LEFT JOIN room_features rf ON r.id = rf.id_room
+            LEFT JOIN features f ON rf.id_features = f.id
+            LEFT JOIN room_facilities rfc ON r.id = rfc.id_room
+            LEFT JOIN facilities fc ON rfc.id_facilities = fc.id
+            GROUP BY r.id
+        ";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+$database = new Database();
+$db = $database->getConnection();
+
+$roomObj = new Room($db);
+$rooms = $roomObj->getRooms();
+?>

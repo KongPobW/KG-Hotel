@@ -1,3 +1,8 @@
+<?php
+require('admin/inc/db_config.php');
+require('admin/class/room.php');
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -97,136 +102,55 @@
             </div>
 
             <div class="col-lg-9 col-md-12 px-4">
+                <?php foreach ($rooms as $room): ?>
                 <div class="card mb-4 border-0 shadow">
                     <div class="row g-0 p-3 align-items-center">
                         <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                            <img src="images/rooms/1.jpg" class="img-fluid rounded w-100 h-100 object-fit-cover">
+                            <img src="admin/uploads/rooms/covers/<?php echo $room['cover']; ?>"
+                                class="img-fluid rounded w-100 h-100 object-fit-cover">
                         </div>
                         <div class="col-md-5 px-lg-3 px-md-3 px-0">
-                            <h5 class="mb-3">Simple Room Name</h5>
+                            <h5 class="mb-3"><?php echo $room['name']; ?></h5>
                             <div class="features mb-3">
                                 <h6 class="mb-1">Features</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bedroom</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bathroom</span>
+                                <?php 
+                                $features = explode(',', $room['features']);
+                                foreach ($features as $feature):
+                                ?>
+                                <span
+                                    class="badge rounded-pill text-bg-light text-wrap lh-base"><?php echo $feature; ?></span>
+                                <?php endforeach; ?>
                             </div>
                             <div class="facilities mb-3">
                                 <h6 class="mb-1">Facilities</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">AC</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Wifi</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Water Heater</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Television</span>
+                                <?php 
+                                $facilities = explode(',', $room['facilities']);
+                                foreach ($facilities as $facility):
+                                ?>
+                                <span
+                                    class="badge rounded-pill text-bg-light text-wrap lh-base"><?php echo $facility; ?></span>
+                                <?php endforeach; ?>
                             </div>
                             <div class="guests">
                                 <h6 class="mb-1">Guests</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">5 Adults</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">2 Children</span>
+                                <span
+                                    class="badge rounded-pill text-bg-light text-wrap lh-base"><?php echo $room['adult']; ?>Adults</span>
+                                <span
+                                    class="badge rounded-pill text-bg-light text-wrap lh-base"><?php echo $room['children']; ?>Children</span>
                             </div>
                         </div>
                         <div class="col-md-2 text-center">
-                            <h6 class="my-4 mt-lg-0 mt-md-0">฿6,120 per night</h6>
+                            <h6 class="my-4 mt-lg-0 mt-md-0">฿<?php echo number_format($room['price'], 2); ?> per night
+                            </h6>
                             <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
                             <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4 border-0 shadow">
-                    <div class="row g-0 p-3 align-items-center">
-                        <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                            <img src="images/rooms/1.jpg" class="img-fluid rounded w-100 h-100 object-fit-cover">
-                        </div>
-                        <div class="col-md-5 px-lg-3 px-md-3 px-0">
-                            <h5 class="mb-3">Simple Room Name</h5>
-                            <div class="features mb-3">
-                                <h6 class="mb-1">Features</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bedroom</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bathroom</span>
-                            </div>
-                            <div class="facilities mb-3">
-                                <h6 class="mb-1">Facilities</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">AC</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Wifi</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Water Heater</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Television</span>
-                            </div>
-                            <div class="guests">
-                                <h6 class="mb-1">Guests</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">5 Adults</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">2 Children</span>
-                            </div>
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <h6 class="my-4 mt-lg-0 mt-md-0">฿6,120 per night</h6>
-                            <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
-                            <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4 border-0 shadow">
-                    <div class="row g-0 p-3 align-items-center">
-                        <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                            <img src="images/rooms/1.jpg" class="img-fluid rounded w-100 h-100 object-fit-cover">
-                        </div>
-                        <div class="col-md-5 px-lg-3 px-md-3 px-0">
-                            <h5 class="mb-3">Simple Room Name</h5>
-                            <div class="features mb-3">
-                                <h6 class="mb-1">Features</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bedroom</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bathroom</span>
-                            </div>
-                            <div class="facilities mb-3">
-                                <h6 class="mb-1">Facilities</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">AC</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Wifi</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Water Heater</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Television</span>
-                            </div>
-                            <div class="guests">
-                                <h6 class="mb-1">Guests</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">5 Adults</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">2 Children</span>
-                            </div>
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <h6 class="my-4 mt-lg-0 mt-md-0">฿6,120 per night</h6>
-                            <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
-                            <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4 border-0 shadow">
-                    <div class="row g-0 p-3 align-items-center">
-                        <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                            <img src="images/rooms/1.jpg" class="img-fluid rounded w-100 h-100 object-fit-cover">
-                        </div>
-                        <div class="col-md-5 px-lg-3 px-md-3 px-0">
-                            <h5 class="mb-3">Simple Room Name</h5>
-                            <div class="features mb-3">
-                                <h6 class="mb-1">Features</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bedroom</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">1 Bathroom</span>
-                            </div>
-                            <div class="facilities mb-3">
-                                <h6 class="mb-1">Facilities</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">AC</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Wifi</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Water Heater</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">Television</span>
-                            </div>
-                            <div class="guests">
-                                <h6 class="mb-1">Guests</h6>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">5 Adults</span>
-                                <span class="badge rounded-pill text-bg-light text-wrap lh-base">2 Children</span>
-                            </div>
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <h6 class="my-4 mt-lg-0 mt-md-0">฿6,120 per night</h6>
-                            <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
-                            <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
+    </div>
     </div>
 
     <?php require('inc/footer.php'); ?>
