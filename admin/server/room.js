@@ -281,7 +281,7 @@ function addImageAndCover(id) {
                     <td><img src="uploads/rooms/covers/${data.cover}" alt="Room Cover" style="width: 100px;"></td>
                     <td></td>
                     <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteRoomImageAndCover('${data.cover}', true)">Delete</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteRoomImageAndCover('${data.cover}', true, this)">Delete</button>
                     </td>
                 </tr>
             `;
@@ -294,7 +294,7 @@ function addImageAndCover(id) {
                     <td></td>
                     <td><img src="uploads/rooms/images/${image}" alt="Room Image" style="width: 100px;"></td>
                     <td>
-                        <button class="btn btn-danger btn-sm" onclick="deleteRoomImageAndCover('${image}', false)">Delete</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteRoomImageAndCover('${image}', false, this)">Delete</button>
                     </td>
                 </tr>
             `;
@@ -357,7 +357,10 @@ function uploadImageAndCover(e) {
         });
 }
 
-function deleteRoomImageAndCover(filename, isCover) {
+function deleteRoomImageAndCover(filename, isCover, btnElement) {
+    btnElement.disabled = true;
+    btnElement.innerHTML = 'Deleting...';
+
     const formData = new FormData();
     formData.append('delete_room_image_cover', true);
     formData.append('room_id', CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD);
@@ -371,13 +374,17 @@ function deleteRoomImageAndCover(filename, isCover) {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                alert('success', 'Deleted successfully!');
-                addImageAndCover(CURRENT_ROOM_ID_FOR_IMAGE_UPLOAD);
+                const row = btnElement.closest('tr');
+                row.classList.add('opacity-50');
+                setTimeout(() => row.remove(), 300);
             } else {
-                alert('danger', 'Failed to delete! Please try again');
+                btnElement.disabled = false;
+                btnElement.innerHTML = 'Delete';
             }
         })
         .catch(err => {
             console.error('Error during delete:', err);
+            btnElement.disabled = false;
+            btnElement.innerHTML = 'Delete';
         });
 }
