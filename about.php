@@ -1,3 +1,7 @@
+<?php 
+require('admin/inc/db_config.php');
+?>
+
 <!doctype html>
 <html lang="en">
 
