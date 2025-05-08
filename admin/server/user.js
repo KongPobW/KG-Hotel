@@ -5,7 +5,7 @@ function registerUser(e) {
     const cpass = document.getElementById('cpass-input').value;
 
     if (pass !== cpass) {
-        alert("Passwords do not match!");
+        alert("danger", "Passwords do not match!", "register");
         return;
     }
 
@@ -20,15 +20,13 @@ function registerUser(e) {
         .then(res => res.text())
         .then(data => {
             if (data === '1') {
-                alert("Registration successful!");
-                form.reset();
-                bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
+                window.location.href = "index.php?register_success=1";
             } else if (data === 'img_upload_failed') {
-                alert("Image upload failed! Try again");
+                alert("danger", "Image upload failed! Try again", "register");
             } else if (data === 'invalid_img') {
-                alert("Only JPG, PNG, JPEG, WEBP, SVG images allowed");
+                alert("danger", "Only JPG, PNG, JPEG, WEBP, SVG images allowed", "register");
             } else {
-                alert("Registration failed! Try again");
+                alert("danger", "Registration failed! Try again", "register");
             }
         })
         .catch(err => {

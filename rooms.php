@@ -156,6 +156,8 @@ require('admin/class/room.php');
     </div>
 
     <?php require('inc/footer.php'); ?>
+    <?php require('inc/register_success.php'); ?>
+    <?php require('admin/inc/script.php'); ?>
 
     <script src="admin/server/user.js"></script>
 

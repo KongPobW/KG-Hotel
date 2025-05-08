@@ -15,6 +15,14 @@ require('admin/class/contact_detail.php');
     <?php require('inc/link.php'); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+    .custom-alert {
+        position: fixed;
+        top: 80px;
+        right: 25px;
+        z-index: 1;
+    }
+    </style>
 </head>
 
 <body>
@@ -203,6 +211,8 @@ require('admin/class/contact_detail.php');
     </div>
 
     <?php require('inc/footer.php'); ?>
+    <?php require('inc/register_success.php'); ?>
+    <?php require('admin/inc/script.php'); ?>
 
     <script src="admin/server/user.js"></script>
 

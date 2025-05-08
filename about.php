@@ -75,6 +75,8 @@ require('admin/inc/db_config.php');
     </div>
 
     <?php require('inc/footer.php'); ?>
+    <?php require('inc/register_success.php'); ?>
+    <?php require('admin/inc/script.php'); ?>
 
     <script src="admin/server/user.js"></script>
 

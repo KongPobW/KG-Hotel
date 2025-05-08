@@ -3,14 +3,25 @@
 </script>
 
 <script>
-function alert(type, msg) {
+function alert(type, msg, forLoginOrRegisterModal = false) {
+    let targetElement;
+
+    if (forLoginOrRegisterModal === 'register') {
+        targetElement = document.querySelector('#registerModal .modal-body');
+    } else if (forLoginOrRegisterModal === 'login') {
+        targetElement = document.querySelector('#loginModal .modal-body');
+    } else {
+        targetElement = document.body;
+    }
+
     let element = document.createElement('div');
     element.innerHTML = `
-             <div class='alert alert-${type} alert-dismissible fade show custom-alert' role='alert'>
-                 <strong>${msg}</strong>
-                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-             </div>`;
-    document.body.append(element);
+        <div class='alert alert-${type} alert-dismissible fade show custom-alert' role='alert'>
+            <strong>${msg}</strong>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>`;
+
+    targetElement.appendChild(element);
 
     setTimeout(() => {
         if (element) {
