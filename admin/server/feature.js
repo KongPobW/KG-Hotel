@@ -39,6 +39,11 @@ function addFeature(e) {
     const nameInput = document.getElementById('feature_name_input');
     const name = nameInput.value.trim();
 
+    if (name === '') {
+        alert("danger", "name field is required!", "#feature-adding");
+        return;
+    }
+
     const formData = new FormData();
     formData.append('add_feature', true);
     formData.append('name', name);
@@ -55,7 +60,7 @@ function addFeature(e) {
                 bootstrap.Modal.getInstance(document.getElementById('feature-adding')).hide();
                 getFeatures();
             } else {
-                alert('danger', 'Failed to add feature! Please try again');
+                alert('danger', 'Failed to add feature! Please try again', '#feature-adding');
             }
         })
         .catch(err => {
