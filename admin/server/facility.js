@@ -43,6 +43,16 @@ function addFacility(e) {
     const desc = document.getElementById('facility_description_input').value.trim();
     const icon = document.getElementById('facility_icon_input').files[0];
 
+    if (name === '' || desc === '') {
+        alert("danger", "All fields are required!", "#facility-adding");
+        return;
+    }
+
+    if (!icon) {
+        alert("danger", "Please upload an icon", "#facility-adding");
+        return;
+    }
+
     const formData = new FormData();
     formData.append('add_facility', true);
     formData.append('name', name);
@@ -60,15 +70,15 @@ function addFacility(e) {
                 bootstrap.Modal.getInstance(document.getElementById('facility-adding')).hide();
                 getFacilities();
             } else if (data === 'invalid_image') {
-                alert('danger', 'Invalid image format. Supported formats are: jpg, jpeg, png, webp, and svg.');
+                alert('danger', 'Invalid image format! Supported formats are: jpg, jpeg, png, webp, and svg', '#facility-adding');
             } else if (data === 'invalid_mime') {
-                alert('danger', 'Invalid file type. Please upload a valid image file.');
+                alert('danger', 'Invalid file type! Please upload a valid image file', '#facility-adding');
             } else if (data === 'large_image') {
-                alert('danger', 'Image is too large. Max 2MB allowed.');
+                alert('danger', 'Image is too large! Max 2MB allowed', '#facility-adding');
             } else if (data === 'upload_failed') {
-                alert('danger', 'Image upload failed.');
+                alert('danger', 'Image upload failed', '#facility-adding');
             } else {
-                alert('danger', 'Failed to add facility! Please try again.');
+                alert('danger', 'Failed to add facility! Please try again', '#facility-adding');
             }
         })
         .catch(err => {
