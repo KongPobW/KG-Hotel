@@ -12,6 +12,14 @@ require('admin/inc/db_config.php');
     <?php require('inc/link.php'); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+    .custom-alert {
+        position: fixed;
+        top: 80px;
+        right: 25px;
+        z-index: 1;
+    }
+    </style>
 </head>
 
 <body>
