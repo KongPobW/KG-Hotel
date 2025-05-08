@@ -7,10 +7,7 @@ function alert(type, msg, modalSelector = null) {
     let targetElement;
 
     if (modalSelector) {
-        const modal = document.querySelector(modalSelector);
-        if (modal) {
-            targetElement = modal.querySelector('.modal-body');
-        }
+        targetElement = document.querySelector(modalSelector + ' .modal-body');
     }
 
     if (!targetElement) {
