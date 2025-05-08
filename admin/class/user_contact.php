@@ -39,9 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $subject = htmlspecialchars($_POST['subject']);
     $message = htmlspecialchars($_POST['message']);
 
-    if ($user_contact->insertMessage($name, $email_input, $subject, $message)) {
-        $success_msg = "Your message has been sent successfully!";
-    } else {
+        if ($user_contact->insertMessage($name, $email_input, $subject, $message)) {
+            $success_msg = "Your message has been sent successfully!";
+        } else {
         $error_msg = "There was an error sending your message! Please try again";
     }
 }
