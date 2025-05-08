@@ -334,7 +334,7 @@ function uploadImageAndCover(e) {
     const imagesSelected = imagesInput.files.length > 0;
 
     if (!coverSelected && !imagesSelected) {
-        alert('danger', 'Please select a cover or room image to upload');
+        alert('danger', 'Please select a cover or room image to upload', '#room-image');
         return;
     }
 
@@ -366,7 +366,7 @@ function uploadImageAndCover(e) {
                 coverInput.value = '';
                 imagesInput.value = '';
             } else {
-                alert('danger', 'Failed to upload! Please try again');
+                alert('danger', 'Failed to upload! Please try again', '#room-image');
             }
         })
         .catch(err => {
