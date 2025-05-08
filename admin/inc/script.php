@@ -3,18 +3,21 @@
 </script>
 
 <script>
-function alert(type, msg, forLoginOrRegisterModal = false) {
+function alert(type, msg, modalSelector = null) {
     let targetElement;
 
-    if (forLoginOrRegisterModal === 'register') {
-        targetElement = document.querySelector('#registerModal .modal-body');
-    } else if (forLoginOrRegisterModal === 'login') {
-        targetElement = document.querySelector('#loginModal .modal-body');
-    } else {
+    if (modalSelector) {
+        const modal = document.querySelector(modalSelector);
+        if (modal) {
+            targetElement = modal.querySelector('.modal-body');
+        }
+    }
+
+    if (!targetElement) {
         targetElement = document.body;
     }
 
-    let element = document.createElement('div');
+    const element = document.createElement('div');
     element.innerHTML = `
         <div class='alert alert-${type} alert-dismissible fade show custom-alert' role='alert'>
             <strong>${msg}</strong>
