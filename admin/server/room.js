@@ -9,6 +9,24 @@ function addRoom(e) {
     const children = document.getElementById('children_max_input').value.trim();
     const desc = document.querySelector('#room-adding textarea[name="desc"]').value.trim();
 
+    if (name === '' || area === '' || price === '' || quantity === '' || adult === '' || children === '' || desc === '') {
+        alert("danger", "All fields are required!", "#room-adding");
+        return;
+    }
+
+    const selectedFeatures = document.querySelectorAll('#room-adding input[name="features[]_add"]:checked');
+    const selectedFacilities = document.querySelectorAll('#room-adding input[name="facilities[]_add"]:checked');
+
+    if (selectedFeatures.length === 0) {
+        alert("danger", "Please select at least one feature!", "#room-adding");
+        return;
+    }
+
+    if (selectedFacilities.length === 0) {
+        alert("danger", "Please select at least one facility!", "#room-adding");
+        return;
+    }
+
     const formData = new FormData();
     formData.append('add_room', true);
     formData.append('name', name);
@@ -19,11 +37,11 @@ function addRoom(e) {
     formData.append('children', children);
     formData.append('desc', desc);
 
-    document.querySelectorAll('#room-adding input[name="features[]_add"]:checked').forEach(input => {
+    selectedFeatures.forEach(input => {
         formData.append('features[]', input.value);
     });
 
-    document.querySelectorAll('#room-adding input[name="facilities[]_add"]:checked').forEach(input => {
+    selectedFacilities.forEach(input => {
         formData.append('facilities[]', input.value);
     });
 
@@ -37,11 +55,10 @@ function addRoom(e) {
             if (data === '1') {
                 alert('success', 'Room added successfully!');
                 bootstrap.Modal.getInstance(document.getElementById('room-adding')).hide();
-
                 document.querySelector('#room-adding form').reset();
                 getRooms();
             } else {
-                alert('danger', 'Failed to add room! Please try again');
+                alert('danger', 'Failed to add room! Please try again', '#room-adding');
             }
         })
         .catch(err => {
