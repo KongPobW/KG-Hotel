@@ -1,7 +1,6 @@
 <?php 
 require('admin/inc/db_config.php');
 require('admin/class/contact_detail.php');
-require('admin/class/user_contact.php');
 ?>
 
 <!doctype html>
@@ -27,7 +26,6 @@ require('admin/class/user_contact.php');
 <body>
     <?php require('inc/header.php'); ?>
     <?php require('inc/modal.php'); ?>
-    <?php require('inc/utils.php'); ?>
 
     <div class="my-5 px-4">
         <h2 class="fw-bold h-font text-center">CONTACT US</h2>
@@ -69,14 +67,7 @@ require('admin/class/user_contact.php');
             </div>
             <div class="col-lg-6 col-md-6 mb-5 px-4">
                 <div class="bg-white rounded shadow p-4">
-                    <?php 
-                    if (isset($success_msg)) { 
-                        alert('success', $success_msg);
-                    } else if (isset($error_msg)) {
-                        alert('danger', $error_msg);
-                    }
-                    ?>
-                    <form method="POST">
+                    <form id="send-message-form">
                         <h5 class="fw-bold">Send Message</h5>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Name</label>
@@ -95,7 +86,8 @@ require('admin/class/user_contact.php');
                             <textarea name="message" class="form-control shadow-none" rows="5" style="resize: none;"
                                 required></textarea>
                         </div>
-                        <button type="submit" class="btn text-white custom-bg mt-3">SUBMIT</button>
+                        <button type="button" class="btn text-white custom-bg mt-3"
+                            onclick="submitUserMessage(event)">SUBMIT</button>
                     </form>
                 </div>
             </div>
@@ -107,6 +99,7 @@ require('admin/class/user_contact.php');
     <?php require('admin/inc/script.php'); ?>
 
     <script src="admin/server/user.js"></script>
+    <script src="admin/server/send_message.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
