@@ -6,3 +6,12 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <?php endif; ?>
+
+<?php if (isset($_GET['reset_success']) && $_GET['reset_success'] == '1'): ?>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    alert("success", "Password reset successful!");
+    history.replaceState(null, '', window.location.pathname);
+});
+</script>
+<?php endif; ?>

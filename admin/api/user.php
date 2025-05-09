@@ -33,3 +33,32 @@ if (isset($_POST['register_user'])) {
 
     echo $res ? 1 : 0;
 }
+
+if (isset($_POST['reset_password'])) {
+    $email = trim($_POST['email']);
+    $pinCode = trim($_POST['pinCode']);
+    $newPassword = $_POST['newPassword'];
+
+    $emailQuery = $conn->prepare("SELECT * FROM user_cred WHERE email = ?");
+    $emailQuery->execute([$email]);
+    $user = $emailQuery->fetch();
+
+    if (!$user) {
+        echo 'invalid_email';
+        exit;
+    }
+
+    $storedPin = trim($user['pincode']);
+
+    if (strcasecmp($storedPin, $pinCode) !== 0) {
+        echo 'invalid_pin';
+        exit;
+    }
+
+    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    $updateQuery = $conn->prepare("UPDATE user_cred SET password = ? WHERE email = ?");
+    $res = $updateQuery->execute([$hashedPassword, $email]);
+
+    echo $res ? '1' : '0';
+}
+?>
