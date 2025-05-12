@@ -1,5 +1,5 @@
 <?php 
-require('admin/class/setting.php');
+require('server/class/setting.php');
 ?>
 
 <footer class="container-fluid bg-black text-white mt-5 pt-5">

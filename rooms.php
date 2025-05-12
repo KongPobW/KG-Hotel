@@ -1,6 +1,6 @@
 <?php
-require('admin/inc/db_config.php');
-require('admin/class/room.php');
+require('public/db_config.php');
+require('server/class/room.php');
 ?>
 
 <!doctype html>
@@ -10,7 +10,7 @@ require('admin/class/room.php');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KG Hotel - Rooms</title>
-    <?php require('inc/link.php'); ?>
+    <?php require('public/link.php'); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -114,7 +114,7 @@ require('admin/class/room.php');
                 <div class="card mb-4 border-0 shadow">
                     <div class="row g-0 p-3 align-items-center">
                         <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                            <img src="admin/uploads/rooms/covers/<?php echo $room['cover']; ?>"
+                            <img src="uploads/rooms/covers/<?php echo $room['cover']; ?>"
                                 class="img-fluid rounded w-100 h-100 object-fit-cover">
                         </div>
                         <div class="col-md-5 px-lg-3 px-md-3 px-0">
@@ -165,9 +165,9 @@ require('admin/class/room.php');
 
     <?php require('inc/footer.php'); ?>
     <?php require('inc/user_success.php'); ?>
-    <?php require('admin/inc/script.php'); ?>
+    <?php require('public/script.php'); ?>
 
-    <script src="admin/server/user.js"></script>
+    <script src="server/js/user.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">

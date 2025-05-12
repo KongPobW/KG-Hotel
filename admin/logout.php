@@ -1,5 +1,5 @@
 <?php
-require('../inc/utils.php');
+require('../public/utils.php');
 
 session_start();
 redirect('index.php');

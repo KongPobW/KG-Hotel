@@ -2,7 +2,7 @@ function getGeneralSetting() {
     const formData = new FormData();
     formData.append('get_general', true);
 
-    fetch('api/setting.php', {
+    fetch('server/api/setting.php', {
         method: 'POST',
         body: formData
     })
@@ -32,7 +32,7 @@ function updateGeneralSetting(e) {
     formData.append('site_title', siteTitle);
     formData.append('site_about', siteAbout);
 
-    fetch('api/setting.php', {
+    fetch('server/api/setting.php', {
         method: 'POST',
         body: formData
     })
@@ -53,7 +53,7 @@ function updateGeneralSetting(e) {
 }
 
 function getShutdownSetting() {
-    fetch('api/setting.php?get_shutdown=1')
+    fetch('server/api/setting.php?get_shutdown=1')
         .then(res => res.text())
         .then(data => {
             const shutdownToggle = document.getElementById('shutdown-toggle');
@@ -73,7 +73,7 @@ function updateShutdownSetting(shutdownStatus, e) {
     formData.append('update_shutdown', true);
     formData.append('shutdown_mode', shutdownStatus);
 
-    fetch('api/setting.php', {
+    fetch('server/api/setting.php', {
         method: 'POST',
         body: formData
     })
@@ -98,7 +98,7 @@ function getContactSetting() {
     const formData = new FormData();
     formData.append('get_contact', true);
 
-    fetch('api/setting.php', {
+    fetch('server/api/setting.php', {
         method: 'POST',
         body: formData
     })
@@ -145,7 +145,7 @@ function updateContactSetting(e) {
     formData.append('pn2', pn2);
     formData.append('email', email);
 
-    fetch('api/setting.php', {
+    fetch('server/api/setting.php', {
         method: 'POST',
         body: formData
     })

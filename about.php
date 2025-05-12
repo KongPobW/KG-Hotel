@@ -1,5 +1,5 @@
 <?php 
-require('admin/inc/db_config.php');
+require('public/db_config.php');
 ?>
 
 <!doctype html>
@@ -9,7 +9,7 @@ require('admin/inc/db_config.php');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KG Hotel - About Us</title>
-    <?php require('inc/link.php'); ?>
+    <?php require('public/link.php'); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -84,9 +84,9 @@ require('admin/inc/db_config.php');
 
     <?php require('inc/footer.php'); ?>
     <?php require('inc/user_success.php'); ?>
-    <?php require('admin/inc/script.php'); ?>
+    <?php require('public/script.php'); ?>
 
-    <script src="admin/server/user.js"></script>
+    <script src="server/js/user.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">

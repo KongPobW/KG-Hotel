@@ -6,7 +6,7 @@ function getFacilities() {
     const formData = new FormData();
     formData.append('get_facilities', true);
 
-    fetch('api/facility.php', {
+    fetch('server/api/facility.php', {
         method: 'POST',
         body: formData
     })
@@ -59,7 +59,7 @@ function addFacility(e) {
     formData.append('description', desc);
     formData.append('icon', icon);
 
-    fetch('api/facility.php', {
+    fetch('server/api/facility.php', {
         method: 'POST',
         body: formData
     })
@@ -91,7 +91,7 @@ function deleteFacility(id) {
     formData.append('delete_facility', true);
     formData.append('id', id);
 
-    fetch('api/facility.php', {
+    fetch('server/api/facility.php', {
         method: 'POST',
         body: formData
     })

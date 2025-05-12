@@ -1,6 +1,6 @@
 <?php
-require('admin/inc/db_config.php');
-require('admin/class/facility.php');
+require('public/db_config.php');
+require('server/class/facility.php');
 ?>
 
 <!doctype html>
@@ -10,7 +10,7 @@ require('admin/class/facility.php');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KG Hotel - Facilities</title>
-    <?php require('inc/link.php'); ?>
+    <?php require('public/link.php'); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -46,7 +46,7 @@ require('admin/class/facility.php');
             <div class="col-lg-4 col-md-6 mb-5 px-4">
                 <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
                     <div class="d-flex align-items-center mb-2">
-                        <img src="admin/uploads/facilities/<?php echo htmlspecialchars($row['icon']); ?>" width="40px"
+                        <img src="uploads/facilities/<?php echo htmlspecialchars($row['icon']); ?>" width="40px"
                             alt="icon">
                         <h5 class="m-0 ms-3"><?php echo htmlspecialchars($row['name']); ?></h5>
                     </div>
@@ -59,9 +59,9 @@ require('admin/class/facility.php');
 
     <?php require('inc/footer.php'); ?>
     <?php require('inc/user_success.php'); ?>
-    <?php require('admin/inc/script.php'); ?>
+    <?php require('public/script.php'); ?>
 
-    <script src="admin/server/user.js"></script>
+    <script src="server/js/user.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">

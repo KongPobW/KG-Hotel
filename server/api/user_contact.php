@@ -1,6 +1,5 @@
 <?php
-require('../inc/db_config.php');
-require('../../inc/utils.php');
+require('../public/db_config.php');
 
 if (isset($_POST['get_messages'])) {
     $stmt = $conn->prepare("SELECT * FROM user_contact");

@@ -5,7 +5,7 @@ function getFeatures() {
     const formData = new FormData();
     formData.append('get_features', true);
 
-    fetch('api/feature.php', {
+    fetch('server/api/feature.php', {
         method: 'POST',
         body: formData
     })
@@ -48,7 +48,7 @@ function addFeature(e) {
     formData.append('add_feature', true);
     formData.append('name', name);
 
-    fetch('api/feature.php', {
+    fetch('server/api/feature.php', {
         method: 'POST',
         body: formData
     })
@@ -73,7 +73,7 @@ function deleteFeature(id) {
     formData.append('delete_feature', true);
     formData.append('id', id);
 
-    fetch('api/feature.php', {
+    fetch('server/api/feature.php', {
         method: 'POST',
         body: formData
     })

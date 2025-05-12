@@ -43,7 +43,7 @@ function registerUser(e) {
     const formData = new FormData(form);
     formData.append('register_user', true);
 
-    fetch('admin/api/user.php', {
+    fetch('server/api/user.php', {
         method: 'POST',
         body: formData
     })
@@ -94,7 +94,7 @@ function resetPassword(e) {
     formData.append('newPassword', newpass);
     formData.append('reset_password', true);
 
-    fetch('admin/api/user.php', {
+    fetch('server/api/user.php', {
         method: 'POST',
         body: formData
     })

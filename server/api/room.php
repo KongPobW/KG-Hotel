@@ -1,6 +1,5 @@
 <?php
-require('../inc/db_config.php');
-require('../../inc/utils.php');
+require('../public/db_config.php');
 
 if (isset($_POST['add_room'])) {
     try {
@@ -73,7 +72,7 @@ if (isset($_POST['delete_room'])) {
     $cover = $coverStmt->fetchColumn();
 
     if ($cover) {
-        $coverPath = "../uploads/rooms/covers/" . $cover;
+        $coverPath = "uploads/rooms/covers/" . $cover;
         if (file_exists($coverPath)) {
             unlink($coverPath);
         }
@@ -85,7 +84,7 @@ if (isset($_POST['delete_room'])) {
 
     if ($images) {
         foreach ($images as $image) {
-            $imagePath = "../uploads/rooms/images/" . $image;
+            $imagePath = "uploads/rooms/images/" . $image;
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
@@ -169,7 +168,7 @@ if (isset($_POST['upload_room_image_cover'])) {
     if (isset($_FILES['room_cover']) && $_FILES['room_cover']['error'] === UPLOAD_ERR_OK) {
         $cover = $_FILES['room_cover'];
         $coverName = 'cover_' . time() . '_' . basename($cover['name']);
-        $coverUploadDir = '../uploads/rooms/covers/';
+        $coverUploadDir = 'uploads/rooms/covers/';
         $coverUploadPath = $coverUploadDir . $coverName;
 
         $coverExt = strtolower(pathinfo($coverName, PATHINFO_EXTENSION));
@@ -203,7 +202,7 @@ if (isset($_POST['upload_room_image_cover'])) {
             $image = $_FILES['room_images'];
             $imageTmpName = $image['tmp_name'][$index];
             $imageNewName = 'image_' . time() . '_' . basename($imageName);
-            $imageUploadDir = '../uploads/rooms/images/';
+            $imageUploadDir = 'uploads/rooms/images/';
             $imageUploadPath = $imageUploadDir . $imageNewName;
 
             $imageExt = strtolower(pathinfo($imageNewName, PATHINFO_EXTENSION));
@@ -240,7 +239,7 @@ if (isset($_POST['delete_room_image_cover'])) {
     $is_cover = filter_var($_POST['is_cover'], FILTER_VALIDATE_BOOLEAN);
 
     if ($is_cover) {
-        $filePath = "../uploads/rooms/covers/" . $filename;
+        $filePath = "uploads/rooms/covers/" . $filename;
 
         if (file_exists($filePath) && unlink($filePath)) {
             $stmt = $conn->prepare("DELETE FROM room_covers WHERE id_room = ? AND cover = ?");
@@ -251,7 +250,7 @@ if (isset($_POST['delete_room_image_cover'])) {
             echo json_encode(['success' => false, 'error' => 'File not found or failed to delete']);
         }
     } else {
-        $filePath = "../uploads/rooms/images/" . $filename;
+        $filePath = "uploads/rooms/images/" . $filename;
 
         if (file_exists($filePath) && unlink($filePath)) {
             $stmt = $conn->prepare("DELETE FROM room_images WHERE id_room = ? AND image = ?");

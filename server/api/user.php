@@ -1,6 +1,5 @@
 <?php
-require('../inc/db_config.php');
-require('../../inc/utils.php');
+require('../public/db_config.php');
 
 if (isset($_POST['register_user'])) {
     $name = trim($_POST['name']);
@@ -21,7 +20,7 @@ if (isset($_POST['register_user'])) {
     }
 
     $img_name = uniqid("IMG_", true) . "." . $ext;
-    $img_path = "../uploads/profiles/" . $img_name;
+    $img_path = "uploads/profiles/" . $img_name;
 
     if (!move_uploaded_file($profile['tmp_name'], $img_path)) {
         echo 'img_upload_failed';

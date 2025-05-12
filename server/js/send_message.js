@@ -21,7 +21,7 @@ function submitUserMessage(e) {
     const formData = new FormData(form);
     formData.append('send_message', true);
 
-    fetch('admin/api/send_message.php', {
+    fetch('server/api/send_message.php', {
         method: 'POST',
         body: formData
     })

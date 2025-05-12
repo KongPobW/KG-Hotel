@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - User Contact</title>
-    <?php require('../inc/link.php'); ?>
+    <?php require('../public/link.php'); ?>
     <link rel="stylesheet" href="./css/style.css">
     <style>
     .custom-alert {
@@ -61,9 +61,9 @@
         </div>
     </div>
 
-    <?php require('inc/script.php'); ?>
+    <?php require('public/script.php'); ?>
 
-    <script src="server/user_contact.js"></script>
+    <script src="server/js/user_contact.js"></script>
 </body>
 
 </html>

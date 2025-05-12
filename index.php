@@ -1,8 +1,8 @@
 <?php
-require('admin/inc/db_config.php');
-require('admin/class/room.php');
-require('admin/class/facility.php');
-require('admin/class/contact_detail.php');
+require('public/db_config.php');
+require('server/class/room.php');
+require('server/class/facility.php');
+require('server/class/contact_detail.php');
 ?>
 
 <!doctype html>
@@ -12,7 +12,7 @@ require('admin/class/contact_detail.php');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KG Hotel - Home</title>
-    <?php require('inc/link.php'); ?>
+    <?php require('public/link.php'); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -109,7 +109,7 @@ require('admin/class/contact_detail.php');
             <?php foreach ($rooms as $room): ?>
             <div class="col-lg-4 col-md-6 my-3">
                 <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                    <img src="admin/uploads/rooms/covers/<?= htmlspecialchars($room['cover']) ?>" class="card-img-top"
+                    <img src="uploads/rooms/covers/<?= htmlspecialchars($room['cover']) ?>" class="card-img-top"
                         alt="<?= htmlspecialchars($room['name']) ?>">
                     <div class="card-body">
                         <h5><?= htmlspecialchars($room['name']) ?></h5>
@@ -163,7 +163,7 @@ require('admin/class/contact_detail.php');
             <?php $facilities = $facilityObj->getFacilitiesLimit(5); ?>
             <?php foreach ($facilities as $facility): ?>
             <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
-                <img src="admin/uploads/facilities/<?= htmlspecialchars($facility['icon']) ?>" width="80px">
+                <img src="uploads/facilities/<?= htmlspecialchars($facility['icon']) ?>" width="80px">
                 <h5 class="mt-3"><?= htmlspecialchars($facility['name']) ?></h5>
             </div>
             <?php endforeach; ?>
@@ -212,9 +212,9 @@ require('admin/class/contact_detail.php');
 
     <?php require('inc/footer.php'); ?>
     <?php require('inc/user_success.php'); ?>
-    <?php require('admin/inc/script.php'); ?>
+    <?php require('public/script.php'); ?>
 
-    <script src="admin/server/user.js"></script>
+    <script src="server/js/user.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">

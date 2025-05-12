@@ -1,6 +1,5 @@
 <?php
-require('../inc/db_config.php');
-require('../../inc/utils.php');
+require('../public/db_config.php');
 
 if (isset($_POST['get_facilities'])) {
     $stmt = $conn->prepare("SELECT * FROM facilities");
@@ -20,7 +19,7 @@ if (isset($_POST['add_facility'])) {
 
     $img = $_FILES['icon'];
     $img_name = time() . '_' . basename($img['name']);
-    $img_path = '../uploads/facilities/' . $img_name;
+    $img_path = 'uploads/facilities/' . $img_name;
     $img_ext = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
     
     $allowed_ext = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
@@ -55,7 +54,7 @@ if (isset($_POST['delete_facility'])) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {
-        $iconPath = '../uploads/facilities/' . $row['icon'];
+        $iconPath = 'uploads/facilities/' . $row['icon'];
 
         $stmt = $conn->prepare("DELETE FROM facilities WHERE id = ?");
         $res = $stmt->execute([$id]);

@@ -45,7 +45,7 @@ function addRoom(e) {
         formData.append('facilities[]', input.value);
     });
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -74,7 +74,7 @@ function getRooms() {
     const formData = new FormData();
     formData.append('get_rooms', true);
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -129,7 +129,7 @@ function deleteRoom(id) {
     formData.append('delete_room', true);
     formData.append('id', id);
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -157,7 +157,7 @@ function toggleStatus(id, currentStatus) {
     formData.append('id', id);
     formData.append('status', newStatus);
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -188,7 +188,7 @@ function editRoom(id) {
     formData.append('get_room_by_id', true);
     formData.append('id', id);
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -252,7 +252,7 @@ function updateRoom(e) {
         formData.append('facilities[]', input.value);
     });
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -283,7 +283,7 @@ function addImageAndCover(id) {
     formData.append('get_room_image_cover', true);
     formData.append('room_id', id);
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -352,7 +352,7 @@ function uploadImageAndCover(e) {
         }
     }
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -384,7 +384,7 @@ function deleteRoomImageAndCover(filename, isCover, btnElement) {
     formData.append('filename', filename);
     formData.append('is_cover', isCover);
 
-    fetch('api/room.php', {
+    fetch('server/api/room.php', {
         method: 'POST',
         body: formData
     })

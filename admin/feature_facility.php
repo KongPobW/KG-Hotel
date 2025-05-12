@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Features & Facilities</title>
-    <?php require('../inc/link.php'); ?>
+    <?php require('../public/link.php'); ?>
     <link rel="stylesheet" href="./css/style.css">
     <style>
     .custom-alert {
@@ -157,10 +157,10 @@
         </div>
     </div>
 
-    <?php require('inc/script.php'); ?>
+    <?php require('public/script.php'); ?>
 
-    <script src="server/feature.js"></script>
-    <script src="server/facility.js"></script>
+    <script src="server/js/feature.js"></script>
+    <script src="server/js/facility.js"></script>
 </body>
 
 </html>

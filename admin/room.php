@@ -1,7 +1,7 @@
 <?php
-require('inc/db_config.php');
-require('class/feature.php');
-require('class/facility.php');
+require('public/db_config.php');
+require('server/class/feature.php');
+require('server/class/facility.php');
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ require('class/facility.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Rooms</title>
-    <?php require('../inc/link.php'); ?>
+    <?php require('../public/link.php'); ?>
     <link rel="stylesheet" href="./css/style.css">
     <style>
     .custom-alert {
@@ -302,9 +302,9 @@ require('class/facility.php');
         </div>
     </div>
 
-    <?php require('inc/script.php'); ?>
+    <?php require('public/script.php'); ?>
 
-    <script src="server/room.js"></script>
+    <script src="server/js/room.js"></script>
 </body>
 
 </html>
