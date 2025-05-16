@@ -15,3 +15,12 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <?php endif; ?>
+
+<?php if (isset($_GET['login_success']) && $_GET['login_success'] == '1'): ?>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    alert("success", "Login successful!");
+    history.replaceState(null, '', window.location.pathname);
+});
+</script>
+<?php endif; ?>

@@ -77,7 +77,7 @@ function resetPassword(e) {
         return;
     }
 
-    if (newpass !== confirmPassword) {
+    if (newpass !== cfpass) {
         alert("danger", "Passwords do not match!", "#forgotPasswordModal");
         return;
     }
@@ -112,5 +112,42 @@ function resetPassword(e) {
         })
         .catch(err => {
             console.error('Resetting password error:', err);
+        });
+}
+
+function loginUser(e) {
+    e.preventDefault();
+
+    const email = document.querySelector('#loginModal input[type="email"]').value.trim();
+    const password = document.querySelector('#loginModal input[type="password"]').value;
+
+    if (email === '' || password === '') {
+        alert("danger", "Email and Password are required!", "#loginModal");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('login_user', true);
+
+    fetch('server/api/user.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.text())
+        .then(data => {
+            if (data === '1') {
+                window.location.href = "index.php?login_success=1";
+            } else if (data === 'invalid_email') {
+                alert("danger", "Email not found!", "#loginModal");
+            } else if (data === 'invalid_password') {
+                alert("danger", "Incorrect password!", "#loginModal");
+            } else {
+                alert("danger", "Login failed! Try again.", "#loginModal");
+            }
+        })
+        .catch(err => {
+            console.error('Login error:', err);
         });
 }
