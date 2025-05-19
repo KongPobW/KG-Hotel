@@ -3,7 +3,7 @@
     <a href="logout.php" class="btn btn-light btn-sm">LOG OUT</a>
 </div>
 
-<div class="col-lg-2 bg-dark border border-top border-3 border-secondary" id="admin-menu">
+<div class="col-lg-2 bg-dark" id="admin-menu">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid flex-lg-column align-items-stretch">
             <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
@@ -16,6 +16,9 @@
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
                         <a class="nav-link text-light" href="dashboard.php" id="dashboard-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="user.php" id="users-link">Users</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="room.php" id="rooms-link">Rooms</a>
@@ -43,6 +46,10 @@ window.onload = function() {
     let menuItems = [{
             id: 'dashboard-link',
             path: '/dashboard.php'
+        },
+        {
+            id: 'users-link',
+            path: '/user.php'
         },
         {
             id: 'rooms-link',

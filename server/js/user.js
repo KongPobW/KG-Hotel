@@ -151,3 +151,52 @@ function loginUser(e) {
             console.error('Login error:', err);
         });
 }
+
+function fetchUsers() {
+    const formData = new FormData();
+    formData.append('get_users', true);
+
+    fetch('../server/api/user.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.text())
+        .then(text => {
+            const data = JSON.parse(text);
+            return data;
+        })
+        .then(data => {
+            const tbody = document.querySelector('.tbody-user');
+            tbody.innerHTML = "";
+
+            data.forEach((user, index) => {
+                const row = `
+                <tr>
+                    <th scope="row">${index + 1}</th>
+                    <td>
+                        <img src="../uploads/profiles/${user.profile}" 
+                             class="img-fluid rounded" 
+                             style="width: 60px; height: 60px; object-fit: cover;">
+                    </td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.address}</td>
+                    <td>${user.pnumber}</td>
+                    <td>${user.dob}</td>
+                    <td>
+                        ${user.status == 1
+                        ? `<button class="btn btn-sm btn-success mark-read" data-id="${user.sr_no}">Active</button>`
+                        : `<button class="btn btn-sm btn-secondary" disabled>Inactive</button>`
+                    }
+                    </td>
+                </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        })
+        .catch(err => {
+            console.error('Failed to fetch users:', err);
+        });
+}
+
+document.addEventListener('DOMContentLoaded', fetchUsers);

@@ -1,6 +1,12 @@
 <?php
 require(__DIR__ . '/../../public/db_config.php');
 
+if (isset($_POST['get_users'])) {
+    $query = $conn->query("SELECT * FROM user_cred ORDER BY sr_no DESC");
+    $users = $query->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($users);
+}
+
 if (isset($_POST['register_user'])) {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
