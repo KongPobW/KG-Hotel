@@ -1,5 +1,5 @@
 <?php
-require('../public/db_config.php');
+require(__DIR__ . '/../../public/db_config.php');
 
 if (isset($_POST['add_room'])) {
     try {
@@ -12,10 +12,8 @@ if (isset($_POST['add_room'])) {
         $desc = $_POST['desc'];
 
         $query = $conn->prepare("INSERT INTO room (name, area, price, quant, adult, children, description)
-                                 VALUES (?,?,?,?,?,?,?)");
-        $res = $query->execute([
-            $name, $area, $price, $quantity, $adult, $children, $desc
-        ]);
+                                 VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $res = $query->execute([$name, $area, $price, $quantity, $adult, $children, $desc]);
 
         if ($res) {
             $room_id = $conn->lastInsertId();
@@ -38,6 +36,7 @@ if (isset($_POST['add_room'])) {
         } else {
             echo 0;
         }
+
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -49,14 +48,14 @@ if (isset($_POST['get_rooms'])) {
 
     foreach ($rooms as &$room) {
         $feature_stmt = $conn->prepare("SELECT f.name FROM features f
-            INNER JOIN room_features rf ON f.id = rf.id_features
-            WHERE rf.id_room = ?");
+                                        INNER JOIN room_features rf ON f.id = rf.id_features
+                                        WHERE rf.id_room = ?");
         $feature_stmt->execute([$room['id']]);
         $room['features'] = $feature_stmt->fetchAll(PDO::FETCH_COLUMN);
 
         $facility_stmt = $conn->prepare("SELECT f.name FROM facilities f
-            INNER JOIN room_facilities rf ON f.id = rf.id_facilities
-            WHERE rf.id_room = ?");
+                                         INNER JOIN room_facilities rf ON f.id = rf.id_facilities
+                                         WHERE rf.id_room = ?");
         $facility_stmt->execute([$room['id']]);
         $room['facilities'] = $facility_stmt->fetchAll(PDO::FETCH_COLUMN);
     }
@@ -72,7 +71,7 @@ if (isset($_POST['delete_room'])) {
     $cover = $coverStmt->fetchColumn();
 
     if ($cover) {
-        $coverPath = "uploads/rooms/covers/" . $cover;
+        $coverPath = __DIR__ . '/../../uploads/covers/' . $cover;
         if (file_exists($coverPath)) {
             unlink($coverPath);
         }
@@ -84,7 +83,7 @@ if (isset($_POST['delete_room'])) {
 
     if ($images) {
         foreach ($images as $image) {
-            $imagePath = "uploads/rooms/images/" . $image;
+            $imagePath = __DIR__ . '/../../uploads/rooms/' . $image;
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
@@ -99,10 +98,10 @@ if (isset($_POST['delete_room'])) {
 if (isset($_POST['toggle_status'])) {
     $id = $_POST['id'];
     $status = $_POST['status'];
-    
+
     $stmt = $conn->prepare("UPDATE room SET status = ? WHERE id = ?");
     $res = $stmt->execute([$status, $id]);
-    
+
     echo $res ? 1 : 0;
 }
 
@@ -138,21 +137,25 @@ if (isset($_POST['update_room'])) {
     $children = $_POST['children'];
     $desc = $_POST['desc'];
 
-    $update_query = $conn->prepare("UPDATE room SET name=?, area=?, price=?, quant=?, adult=?, children=?, description=? WHERE id=?");
+    $update_query = $conn->prepare("UPDATE room 
+                                    SET name=?, area=?, price=?, quant=?, adult=?, children=?, description=? 
+                                    WHERE id=?");
     $res = $update_query->execute([$name, $area, $price, $quantity, $adult, $children, $desc, $id]);
 
     if ($res) {
         $conn->prepare("DELETE FROM room_features WHERE id_room = ?")->execute([$id]);
         if (isset($_POST['features'])) {
             foreach ($_POST['features'] as $feature_id) {
-                $conn->prepare("INSERT INTO room_features (id_room, id_features) VALUES (?, ?)")->execute([$id, $feature_id]);
+                $conn->prepare("INSERT INTO room_features (id_room, id_features) VALUES (?, ?)")
+                     ->execute([$id, $feature_id]);
             }
         }
 
         $conn->prepare("DELETE FROM room_facilities WHERE id_room = ?")->execute([$id]);
         if (isset($_POST['facilities'])) {
             foreach ($_POST['facilities'] as $facility_id) {
-                $conn->prepare("INSERT INTO room_facilities (id_room, id_facilities) VALUES (?, ?)")->execute([$id, $facility_id]);
+                $conn->prepare("INSERT INTO room_facilities (id_room, id_facilities) VALUES (?, ?)")
+                     ->execute([$id, $facility_id]);
             }
         }
 
@@ -165,15 +168,15 @@ if (isset($_POST['update_room'])) {
 if (isset($_POST['upload_room_image_cover'])) {
     $room_id = $_POST['room_id'];
 
+    $coverUploadDir = __DIR__ . '/../../uploads/rooms/covers/';
+    if (!is_dir($coverUploadDir)) {
+        mkdir($coverUploadDir, 0777, true);
+    }
+
     if (isset($_FILES['room_cover']) && $_FILES['room_cover']['error'] === UPLOAD_ERR_OK) {
         $cover = $_FILES['room_cover'];
         $coverName = 'cover_' . time() . '_' . basename($cover['name']);
-        $coverUploadDir = 'uploads/rooms/covers/';
         $coverUploadPath = $coverUploadDir . $coverName;
-
-        $coverExt = strtolower(pathinfo($coverName, PATHINFO_EXTENSION));
-        $allowedExt = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
-        $allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
 
         if (move_uploaded_file($cover['tmp_name'], $coverUploadPath)) {
             $existingCoverStmt = $conn->prepare("SELECT cover FROM room_covers WHERE id_room = ?");
@@ -181,7 +184,7 @@ if (isset($_POST['upload_room_image_cover'])) {
             $existingCover = $existingCoverStmt->fetchColumn();
 
             if ($existingCover) {
-                unlink($coverUploadDir . $existingCover);
+                @unlink($coverUploadDir . $existingCover);
                 $updateQuery = $conn->prepare("UPDATE room_covers SET cover = ? WHERE id_room = ?");
                 $updateQuery->execute([$coverName, $room_id]);
             } else {
@@ -194,18 +197,16 @@ if (isset($_POST['upload_room_image_cover'])) {
         }
     }
 
+    $imageUploadDir = __DIR__ . '/../../uploads/rooms/images/';
+    if (!is_dir($imageUploadDir)) {
+        mkdir($imageUploadDir, 0777, true);
+    }
+
     if (isset($_FILES['room_images']) && count($_FILES['room_images']['name']) > 0) {
-        $allowedExt = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
-        $allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
-
         foreach ($_FILES['room_images']['name'] as $index => $imageName) {
-            $image = $_FILES['room_images'];
-            $imageTmpName = $image['tmp_name'][$index];
+            $imageTmpName = $_FILES['room_images']['tmp_name'][$index];
             $imageNewName = 'image_' . time() . '_' . basename($imageName);
-            $imageUploadDir = 'uploads/rooms/images/';
             $imageUploadPath = $imageUploadDir . $imageNewName;
-
-            $imageExt = strtolower(pathinfo($imageNewName, PATHINFO_EXTENSION));
 
             if (move_uploaded_file($imageTmpName, $imageUploadPath)) {
                 $query = $conn->prepare("INSERT INTO room_images (id_room, image) VALUES (?, ?)");
@@ -226,6 +227,7 @@ if (isset($_POST['get_room_image_cover'])) {
     $coverStmt = $conn->prepare("SELECT cover FROM room_covers WHERE id_room = ?");
     $coverStmt->execute([$room_id]);
     $cover = $coverStmt->fetchColumn();
+
     $imagesStmt = $conn->prepare("SELECT image FROM room_images WHERE id_room = ?");
     $imagesStmt->execute([$room_id]);
     $images = $imagesStmt->fetchAll(PDO::FETCH_COLUMN);
@@ -238,28 +240,18 @@ if (isset($_POST['delete_room_image_cover'])) {
     $filename = $_POST['filename'];
     $is_cover = filter_var($_POST['is_cover'], FILTER_VALIDATE_BOOLEAN);
 
-    if ($is_cover) {
-        $filePath = "uploads/rooms/covers/" . $filename;
+    $baseDir = $is_cover ? '/../../uploads/rooms/covers/' : '/../../uploads/rooms/images/';
+    $filePath = __DIR__ . $baseDir . $filename;
 
-        if (file_exists($filePath) && unlink($filePath)) {
-            $stmt = $conn->prepare("DELETE FROM room_covers WHERE id_room = ? AND cover = ?");
-            $res = $stmt->execute([$room_id, $filename]);
+    if (file_exists($filePath) && unlink($filePath)) {
+        $table = $is_cover ? "room_covers" : "room_images";
+        $column = $is_cover ? "cover" : "image";
+        $stmt = $conn->prepare("DELETE FROM $table WHERE id_room = ? AND $column = ?");
+        $res = $stmt->execute([$room_id, $filename]);
 
-            echo json_encode(['success' => $res]);
-        } else {
-            echo json_encode(['success' => false, 'error' => 'File not found or failed to delete']);
-        }
+        echo json_encode(['success' => $res]);
     } else {
-        $filePath = "uploads/rooms/images/" . $filename;
-
-        if (file_exists($filePath) && unlink($filePath)) {
-            $stmt = $conn->prepare("DELETE FROM room_images WHERE id_room = ? AND image = ?");
-            $res = $stmt->execute([$room_id, $filename]);
-
-            echo json_encode(['success' => $res]);
-        } else {
-            echo json_encode(['success' => false, 'error' => 'File not found or failed to delete']);
-        }
+        echo json_encode(['success' => false, 'error' => 'File not found or failed to delete']);
     }
 }
 ?>

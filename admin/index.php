@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    require('public/db_config.php');
+    require('../public/db_config.php');
     require('../public/utils.php');
 
     if (isset($_SESSION['isAdminLogin']) && $_SESSION['isAdminLogin'] == true) {
@@ -79,7 +79,7 @@
     }
     ?>
 
-    <?php require('public/script.php'); ?>
+    <?php require('../public/script.php'); ?>
 </body>
 
 </html>

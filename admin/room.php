@@ -1,7 +1,7 @@
 <?php
-require('public/db_config.php');
-require('server/class/feature.php');
-require('server/class/facility.php');
+require('../public/db_config.php');
+require('../server/class/feature.php');
+require('../server/class/facility.php');
 ?>
 
 <!DOCTYPE html>
@@ -302,9 +302,9 @@ require('server/class/facility.php');
         </div>
     </div>
 
-    <?php require('public/script.php'); ?>
+    <?php require('../public/script.php'); ?>
 
-    <script src="server/js/room.js"></script>
+    <script src="../server/js/room.js"></script>
 </body>
 
 </html>

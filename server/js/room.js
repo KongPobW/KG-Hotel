@@ -45,7 +45,7 @@ function addRoom(e) {
         formData.append('facilities[]', input.value);
     });
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -74,7 +74,7 @@ function getRooms() {
     const formData = new FormData();
     formData.append('get_rooms', true);
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -102,13 +102,13 @@ function getRooms() {
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary me-1" onclick="editRoom(${room.id})">
+                                <button class="btn btn-sm btn-primary me-1 mb-1" onclick="editRoom(${room.id})">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                <button class="btn btn-sm btn-info me-1" onclick="addImageAndCover(${room.id})">
+                                <button class="btn btn-sm btn-info me-1 mb-1" onclick="addImageAndCover(${room.id})">
                                     <i class="bi bi-images"></i>
                                 </button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteRoom(${room.id})">
+                                <button class="btn btn-sm btn-danger mb-1" onclick="deleteRoom(${room.id})">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </td>
@@ -129,7 +129,7 @@ function deleteRoom(id) {
     formData.append('delete_room', true);
     formData.append('id', id);
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -157,7 +157,7 @@ function toggleStatus(id, currentStatus) {
     formData.append('id', id);
     formData.append('status', newStatus);
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -188,7 +188,7 @@ function editRoom(id) {
     formData.append('get_room_by_id', true);
     formData.append('id', id);
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -252,7 +252,7 @@ function updateRoom(e) {
         formData.append('facilities[]', input.value);
     });
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -283,7 +283,7 @@ function addImageAndCover(id) {
     formData.append('get_room_image_cover', true);
     formData.append('room_id', id);
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -295,7 +295,7 @@ function addImageAndCover(id) {
             if (data.cover) {
                 const coverRow = `
                 <tr>
-                    <td><img src="uploads/rooms/covers/${data.cover}" alt="Room Cover" style="width: 100px;"></td>
+                    <td><img src="../uploads/rooms/covers/${data.cover}" alt="Room Cover" style="width: 100px;"></td>
                     <td></td>
                     <td>
                         <button class="btn btn-danger btn-sm" onclick="deleteRoomImageAndCover('${data.cover}', true, this)">Delete</button>
@@ -309,7 +309,7 @@ function addImageAndCover(id) {
                 const imageRow = `
                 <tr>
                     <td></td>
-                    <td><img src="uploads/rooms/images/${image}" alt="Room Image" style="width: 100px;"></td>
+                    <td><img src="../uploads/rooms/images/${image}" alt="Room Image" style="width: 100px;"></td>
                     <td>
                         <button class="btn btn-danger btn-sm" onclick="deleteRoomImageAndCover('${image}', false, this)">Delete</button>
                     </td>
@@ -352,7 +352,7 @@ function uploadImageAndCover(e) {
         }
     }
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })
@@ -384,7 +384,7 @@ function deleteRoomImageAndCover(filename, isCover, btnElement) {
     formData.append('filename', filename);
     formData.append('is_cover', isCover);
 
-    fetch('server/api/room.php', {
+    fetch('../server/api/room.php', {
         method: 'POST',
         body: formData
     })

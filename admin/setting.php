@@ -78,7 +78,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal"
                                         onclick="getGeneralSetting()">CANCEL</button>
-                                        <button type="submit" class="btn custom-bg text-white shadow-none"
+                                    <button type="submit" class="btn custom-bg text-white shadow-none"
                                         onclick="updateGeneralSetting(event)">SUBMIT</button>
                                 </div>
                             </div>
@@ -195,9 +195,9 @@
         </div>
     </div>
 
-    <?php require('public/script.php'); ?>
+    <?php require('../public/script.php'); ?>
 
-    <script src="server/js/setting.js"></script>
+    <script src="../server/js/setting.js"></script>
 </body>
 
 </html>

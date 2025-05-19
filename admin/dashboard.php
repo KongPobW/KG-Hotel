@@ -34,7 +34,7 @@
         </dic>
     </div>
 
-    <?php require('public/script.php'); ?>
+    <?php require('../public/script.php'); ?>
 </body>
 
 </html>

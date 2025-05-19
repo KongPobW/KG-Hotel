@@ -2,7 +2,7 @@ function getAllMessages() {
     const formData = new FormData();
     formData.append('get_messages', true);
 
-    fetch('server/api/user_contact.php', {
+    fetch('../server/api/user_contact.php', {
         method: 'POST',
         body: formData
     })
@@ -53,7 +53,7 @@ function updateMessageStatus(messageId) {
     formData.append('update_message_status', true);
     formData.append('message_id', messageId);
 
-    fetch('server/api/user_contact.php', {
+    fetch('../server/api/user_contact.php', {
         method: 'POST',
         body: formData
     })

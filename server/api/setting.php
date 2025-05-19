@@ -1,5 +1,5 @@
 <?php
-require('../public/db_config.php');
+require(__DIR__ . '/../../public/db_config.php');
 
 if (isset($_POST['get_general'])) {
     $stmt = $conn->prepare("SELECT * FROM setting WHERE sr_no = 1");

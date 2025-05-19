@@ -1,5 +1,6 @@
 <?php
 require('public/db_config.php');
+require('server/class/contact_detail.php');
 require('server/class/room.php');
 ?>
 

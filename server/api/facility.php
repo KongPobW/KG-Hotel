@@ -1,5 +1,5 @@
 <?php
-require('../public/db_config.php');
+require(__DIR__ . '/../../public/db_config.php');
 
 if (isset($_POST['get_facilities'])) {
     $stmt = $conn->prepare("SELECT * FROM facilities");
@@ -19,21 +19,27 @@ if (isset($_POST['add_facility'])) {
 
     $img = $_FILES['icon'];
     $img_name = time() . '_' . basename($img['name']);
-    $img_path = 'uploads/facilities/' . $img_name;
     $img_ext = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
-    
+
     $allowed_ext = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
+    $allowed_mimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
 
     if (!in_array($img_ext, $allowed_ext)) {
         echo 'invalid_image';
         exit;
     }
 
-    $allowed_mimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
     if (!in_array($img['type'], $allowed_mimes)) {
         echo 'invalid_mime';
         exit;
     }
+
+    $uploadDir = __DIR__ . '/../../uploads/facilities/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $img_path = $uploadDir . $img_name;
 
     if (move_uploaded_file($img['tmp_name'], $img_path)) {
         $stmt = $conn->prepare("INSERT INTO facilities (name, description, icon) VALUES (?, ?, ?)");
@@ -54,7 +60,7 @@ if (isset($_POST['delete_facility'])) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {
-        $iconPath = 'uploads/facilities/' . $row['icon'];
+        $iconPath = __DIR__ . '/../../uploads/facilities/' . $row['icon'];
 
         $stmt = $conn->prepare("DELETE FROM facilities WHERE id = ?");
         $res = $stmt->execute([$id]);

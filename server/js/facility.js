@@ -6,7 +6,7 @@ function getFacilities() {
     const formData = new FormData();
     formData.append('get_facilities', true);
 
-    fetch('server/api/facility.php', {
+    fetch('../server/api/facility.php', {
         method: 'POST',
         body: formData
     })
@@ -20,7 +20,7 @@ function getFacilities() {
                     const row = `
                     <tr>
                         <td>${index + 1}</td>
-                        <td><img src="uploads/facilities/${facility.icon}" width="40" /></td>
+                        <td><img src="../uploads/facilities/${facility.icon}" width="40" /></td>
                         <td>${facility.name}</td>
                         <td>${facility.description}</td>
                         <td>
@@ -59,7 +59,7 @@ function addFacility(e) {
     formData.append('description', desc);
     formData.append('icon', icon);
 
-    fetch('server/api/facility.php', {
+    fetch('../server/api/facility.php', {
         method: 'POST',
         body: formData
     })
@@ -91,7 +91,7 @@ function deleteFacility(id) {
     formData.append('delete_facility', true);
     formData.append('id', id);
 
-    fetch('server/api/facility.php', {
+    fetch('../server/api/facility.php', {
         method: 'POST',
         body: formData
     })

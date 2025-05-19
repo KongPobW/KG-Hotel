@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2025 at 04:03 AM
+-- Generation Time: May 19, 2025 at 03:34 AM
 -- Server version: 11.7.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -149,10 +149,11 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id`, `name`, `area`, `price`, `quant`, `adult`, `children`, `description`, `status`) VALUES
-(1, 'Deluxe King Room', 350, 2800, 10, 2, 1, 'Spacious room with a king-size bed, private balcony, modern bathroom, free Wi-Fi, and complimentary breakfast. Ideal for couples or small families.', 1),
+(1, 'Deluxe King Room', 350, 2800, 5, 2, 1, 'Spacious room with a king-size bed, private balcony, modern bathroom, free Wi-Fi, and complimentary breakfast. Ideal for couples or small families.', 1),
 (2, 'Superior Twin Room', 300, 2400, 8, 2, 0, 'Comfortable twin beds, work desk, flat-screen TV, and high-speed internet. Perfect for business travelers or friends.', 1),
 (3, 'Family Suite', 500, 4200, 5, 3, 2, 'Large suite with a living area, two queen beds, a sofa bed, kitchenette, and kids-friendly amenities. Ideal for families.', 1),
-(4, 'Executive Suite', 600, 5200, 3, 2, 1, 'Luxury suite featuring a separate lounge area, king-size bed, city view, bathtub, and executive work space. Perfect for long stays or business executives.', 1);
+(4, 'Executive Suite', 600, 5200, 3, 2, 1, 'Luxury suite featuring a separate lounge area, king-size bed, city view, bathtub, and executive work space. Perfect for long stays or business executives.', 1),
+(5, 'KG King Room', 380, 4000, 2, 2, 0, 'Spacious room with a king-size bed, private balcony, modern bathroom, free Wi-Fi, and complimentary breakfast. Ideal for couples or small families.', 1);
 
 --
 -- Triggers `room`
@@ -194,7 +195,8 @@ INSERT INTO `room_covers` (`id`, `cover`, `id_room`) VALUES
 (1, 'cover_1746418602_1280x720-placeholder.webp', 1),
 (2, 'cover_1746418617_1280x720-placeholder.webp', 2),
 (3, 'cover_1746418634_1280x720-placeholder.webp', 3),
-(4, 'cover_1746418650_1280x720-placeholder.webp', 4);
+(4, 'cover_1746418650_1280x720-placeholder.webp', 4),
+(5, 'cover_1746693833_1280x720-placeholder.webp', 5);
 
 -- --------------------------------------------------------
 
@@ -225,10 +227,14 @@ INSERT INTO `room_facilities` (`sr_no`, `id_room`, `id_facilities`) VALUES
 (10, 2, 3),
 (11, 2, 2),
 (12, 2, 1),
-(13, 1, 4),
-(14, 1, 3),
-(15, 1, 2),
-(16, 1, 1);
+(17, 5, 5),
+(18, 5, 4),
+(19, 5, 3),
+(20, 5, 2),
+(21, 1, 4),
+(22, 1, 3),
+(23, 1, 2),
+(24, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -255,8 +261,11 @@ INSERT INTO `room_features` (`sr_no`, `id_room`, `id_features`) VALUES
 (6, 3, 1),
 (7, 2, 2),
 (8, 2, 1),
-(9, 1, 2),
-(10, 1, 1);
+(11, 5, 3),
+(12, 5, 2),
+(13, 5, 1),
+(14, 1, 2),
+(15, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -276,13 +285,14 @@ CREATE TABLE `room_images` (
 
 INSERT INTO `room_images` (`id`, `image`, `id_room`) VALUES
 (1, 'image_1746418602_1280x720-placeholder.webp', 1),
-(2, 'image_1746418607_1280x720-placeholder.webp', 1),
 (3, 'image_1746418617_1280x720-placeholder.webp', 2),
 (4, 'image_1746418622_1280x720-placeholder.webp', 2),
 (5, 'image_1746418634_1280x720-placeholder.webp', 3),
 (6, 'image_1746418642_1280x720-placeholder.webp', 3),
 (7, 'image_1746418650_1280x720-placeholder.webp', 4),
-(8, 'image_1746418654_1280x720-placeholder.webp', 4);
+(8, 'image_1746418654_1280x720-placeholder.webp', 4),
+(9, 'image_1746693833_1280x720-placeholder.webp', 5),
+(10, 'image_1747389410_1280x720-placeholder.webp', 5);
 
 -- --------------------------------------------------------
 
@@ -326,7 +336,7 @@ CREATE TABLE `user_contact` (
 
 INSERT INTO `user_contact` (`sr_no`, `name`, `email`, `subject`, `message`, `date`, `seen`) VALUES
 (1, 'Alice Johnson', 'alice.johnson@example.com', 'Booking inquiry', 'I would like to know if there are rooms available from May 5 to May 10.', '2025-04-20', 1),
-(2, 'Bob Smith', 'bobsmith@gmail.com', 'Pet policy', 'Do you allow small dogs in your hotel rooms?', '2025-04-21', 0),
+(2, 'Bob Smith', 'bobsmith@gmail.com', 'Pet policy', 'Do you allow small dogs in your hotel rooms?', '2025-04-21', 1),
 (3, 'Clara Lee', 'claralee@yahoo.com', 'Event hosting', 'Can your hotel accommodate a wedding reception for 100 guests?', '2025-04-22', 0),
 (4, 'David Kim', 'dkim@outlook.com', 'Room issue', 'There was no hot water in my bathroom during my stay.', '2025-04-23', 0),
 (5, 'Eva Martinez', 'eva.martinez@mail.com', 'Airport shuttle', 'Does the hotel provide shuttle service to and from the airport?', '2025-04-24', 0),
@@ -335,6 +345,34 @@ INSERT INTO `user_contact` (`sr_no`, `name`, `email`, `subject`, `message`, `dat
 (8, 'Henry Davis', 'henryd@example.net', 'Group booking', 'We are a group of 15 people. Do you offer group discounts?', '2025-04-27', 0),
 (9, 'Isla Brown', 'isbrown@aol.com', 'Breakfast options', 'Is breakfast included with the room rate?', '2025-04-28', 0),
 (10, 'Jack Wilson', 'jackwilson@domain.com', 'Great experience', 'Had a wonderful stay! The staff were very helpful and friendly.', '2025-04-29', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_cred`
+--
+
+CREATE TABLE `user_cred` (
+  `sr_no` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `address` varchar(150) NOT NULL,
+  `pnumber` varchar(10) NOT NULL,
+  `pincode` int(11) NOT NULL,
+  `dob` varchar(10) NOT NULL,
+  `profile` varchar(255) NOT NULL,
+  `password` varchar(150) NOT NULL,
+  `t_expire` date DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `datentime` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `user_cred`
+--
+
+INSERT INTO `user_cred` (`sr_no`, `name`, `email`, `address`, `pnumber`, `pincode`, `dob`, `profile`, `password`, `t_expire`, `status`, `datentime`) VALUES
+(1, 'Kongpob', 'kongpob.wisitsak@gmail.com', 'BKK', '0982592063', 1234, '2025-05-16', 'IMG_6826f8c7ba1996.86291512.jpg', '$2y$10$wMb4xyCedz1fvFVvkvHWvuA7kFKq7dQuUdOX1wPPnNzfiFt3w1uIi', NULL, 1, '2025-05-16 15:35:19');
 
 --
 -- Indexes for dumped tables
@@ -413,6 +451,12 @@ ALTER TABLE `user_contact`
   ADD PRIMARY KEY (`sr_no`);
 
 --
+-- Indexes for table `user_cred`
+--
+ALTER TABLE `user_cred`
+  ADD PRIMARY KEY (`sr_no`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -444,31 +488,31 @@ ALTER TABLE `features`
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `room_covers`
 --
 ALTER TABLE `room_covers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `room_facilities`
 --
 ALTER TABLE `room_facilities`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `room_features`
 --
 ALTER TABLE `room_features`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `room_images`
 --
 ALTER TABLE `room_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `setting`
@@ -481,6 +525,12 @@ ALTER TABLE `setting`
 --
 ALTER TABLE `user_contact`
   MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `user_cred`
+--
+ALTER TABLE `user_cred`
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

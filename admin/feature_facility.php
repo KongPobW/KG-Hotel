@@ -157,10 +157,10 @@
         </div>
     </div>
 
-    <?php require('public/script.php'); ?>
+    <?php require('../public/script.php'); ?>
 
-    <script src="server/js/feature.js"></script>
-    <script src="server/js/facility.js"></script>
+    <script src="../server/js/feature.js"></script>
+    <script src="../server/js/facility.js"></script>
 </body>
 
 </html>

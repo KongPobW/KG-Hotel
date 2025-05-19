@@ -61,9 +61,9 @@
         </div>
     </div>
 
-    <?php require('public/script.php'); ?>
+    <?php require('../public/script.php'); ?>
 
-    <script src="server/js/user_contact.js"></script>
+    <script src="../server/js/user_contact.js"></script>
 </body>
 
 </html>

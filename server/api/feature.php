@@ -1,5 +1,5 @@
 <?php
-require('../public/db_config.php');
+require(__DIR__ . '/../../public/db_config.php');
 
 if (isset($_POST['add_feature'])) {
     $name = trim($_POST['name']);
