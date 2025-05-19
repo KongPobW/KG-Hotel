@@ -1,7 +1,3 @@
-<?php 
-require('server/class/setting.php');
-?>
-
 <footer class="container-fluid bg-black text-white mt-5 pt-5">
     <div class="row justify-content-between">
         <div class="col-12 col-md-6 col-lg-4 mb-4 px-4">

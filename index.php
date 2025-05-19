@@ -3,6 +3,7 @@ require('public/db_config.php');
 require('server/class/room.php');
 require('server/class/facility.php');
 require('server/class/contact_detail.php');
+require('server/class/setting.php');
 ?>
 
 <!doctype html>
@@ -31,6 +32,7 @@ require('server/class/contact_detail.php');
 
     <!-- carousel header -->
     <div class="container-fluid">
+        <?php require('inc/shutdown_alert.php'); ?>
         <div class="swiper swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -141,8 +143,11 @@ require('server/class/contact_detail.php');
                         </div>
 
                         <div class="d-flex mb-2 gap-2">
+                            <?php if ($shutdown != 1): ?>
                             <a href="book.php?room_id=<?= $room['id'] ?>"
                                 class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
+                            <?php endif; ?>
+
                             <a href="room_detail.php?id=<?= $room['id'] ?>"
                                 class="btn btn-sm btn-outline-dark shadow-none">Details</a>
                         </div>

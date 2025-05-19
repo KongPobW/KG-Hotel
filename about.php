@@ -1,6 +1,7 @@
 <?php 
 require('public/db_config.php');
 require('server/class/contact_detail.php');
+require('server/class/setting.php');
 ?>
 
 <!doctype html>
@@ -26,6 +27,8 @@ require('server/class/contact_detail.php');
 <body>
     <?php require('inc/header.php'); ?>
     <?php require('inc/modal.php'); ?>
+
+    <?php require('inc/shutdown_alert.php'); ?>
 
     <div class="my-5 px-4">
         <h2 class="fw-bold h-font text-center">ABOUT US</h2>

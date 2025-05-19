@@ -2,6 +2,7 @@
 require('public/db_config.php');
 require('server/class/contact_detail.php');
 require('server/class/room.php');
+require('server/class/setting.php');
 ?>
 
 <!doctype html>
@@ -28,6 +29,8 @@ require('server/class/room.php');
     <?php require('inc/header.php'); ?>
     <?php require('public/utils.php'); ?>
     <?php require('inc/modal.php'); ?>
+
+    <?php require('inc/shutdown_alert.php'); ?>
 
     <?php
     if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -119,7 +122,9 @@ require('server/class/room.php');
                                 class="badge rounded-pill text-bg-light text-wrap lh-base mt-2"><?php echo $room['children']; ?>
                                 Children</span>
                         </div>
+                        <?php if ($shutdown != 1): ?>
                         <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-3">Book Now</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

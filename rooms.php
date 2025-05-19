@@ -2,6 +2,7 @@
 require('public/db_config.php');
 require('server/class/contact_detail.php');
 require('server/class/room.php');
+require('server/class/setting.php');
 ?>
 
 <!doctype html>
@@ -27,6 +28,8 @@ require('server/class/room.php');
 <body>
     <?php require('inc/header.php'); ?>
     <?php require('inc/modal.php'); ?>
+
+    <?php require('inc/shutdown_alert.php'); ?>
 
     <div class="my-5 px-4">
         <h2 class="fw-bold h-font text-center">OUR ROOMS</h2>
@@ -153,7 +156,9 @@ require('server/class/room.php');
                         <div class="col-md-2 text-center">
                             <h6 class="my-4 mt-lg-0 mt-md-0">฿<?php echo number_format($room['price'], 0); ?> per night
                             </h6>
+                            <?php if ($shutdown != 1): ?>
                             <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                            <?php endif; ?>
                             <a href="room_detail.php?id=<?php echo $room['id']; ?>"
                                 class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>
                         </div>
