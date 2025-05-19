@@ -143,7 +143,7 @@ require('server/class/contact_detail.php');
                         <div class="d-flex mb-2 gap-2">
                             <a href="book.php?room_id=<?= $room['id'] ?>"
                                 class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
-                            <a href="room_details.php?id=<?= $room['id'] ?>"
+                            <a href="room_detail.php?id=<?= $room['id'] ?>"
                                 class="btn btn-sm btn-outline-dark shadow-none">Details</a>
                         </div>
                     </div>
