@@ -92,10 +92,25 @@ if (isset($_POST['login_user'])) {
         exit;
     }
 
+    if (isset($user['status']) && intval($user['status']) === 0) {
+        echo 'inactive_user';
+        exit;
+    }
+
     session_start();
     $_SESSION['user_id'] = $user['sr_no'];
     $_SESSION['user_name'] = $user['name'];
 
     echo '1';
+}
+
+if (isset($_POST['update_status'])) {
+    $userId = intval($_POST['user_id']);
+    $status = intval($_POST['status']) === 1 ? 1 : 0;
+
+    $stmt = $conn->prepare("UPDATE user_cred SET status = ? WHERE sr_no = ?");
+    $res = $stmt->execute([$status, $userId]);
+
+    echo $res ? '1' : '0';
 }
 ?>

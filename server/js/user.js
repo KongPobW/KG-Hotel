@@ -143,6 +143,8 @@ function loginUser(e) {
                 alert("danger", "Email not found!", "#loginModal");
             } else if (data === 'invalid_password') {
                 alert("danger", "Incorrect password!", "#loginModal");
+            } else if (data === 'inactive_user') {
+                alert("danger", "Account has been blocked!", "#loginModal");
             } else {
                 alert("danger", "Login failed! Try again.", "#loginModal");
             }
@@ -173,6 +175,7 @@ function fetchUsers() {
                 const row = `
                 <tr>
                     <th scope="row">${index + 1}</th>
+                    <td style="display:none;" class="user-id">${user.sr_no}</td>
                     <td>
                         <img src="../uploads/profiles/${user.profile}" 
                              class="img-fluid rounded" 
@@ -185,9 +188,9 @@ function fetchUsers() {
                     <td>${user.dob}</td>
                     <td>
                         ${user.status == 1
-                        ? `<button class="btn btn-sm btn-success mark-read" data-id="${user.sr_no}">Active</button>`
-                        : `<button class="btn btn-sm btn-secondary" disabled>Inactive</button>`
-                    }
+                            ? `<button class="btn btn-sm btn-success toggle-status-btn">Active</button>`
+                            : `<button class="btn btn-sm btn-secondary toggle-status-btn">Inactive</button>`
+                        }
                     </td>
                 </tr>
                 `;
@@ -200,3 +203,51 @@ function fetchUsers() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchUsers);
+
+function toggleUserStatus(e) {
+    if (!e.target.classList.contains('toggle-status-btn')) return;
+
+    const btn = e.target;
+    const tr = btn.closest('tr');
+    if (!tr) return;
+
+    const userIdCell = tr.querySelector('.user-id');
+    if (!userIdCell) return;
+
+    const userId = userIdCell.textContent.trim();
+
+    const currentStatus = btn.textContent.trim() === 'Active' ? 1 : 0;
+    const newStatus = currentStatus === 1 ? 0 : 1;
+
+    const formData = new FormData();
+    formData.append('update_status', true);
+    formData.append('user_id', userId);
+    formData.append('status', newStatus);
+
+    fetch('../server/api/user.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.text())
+        .then(data => {
+            if (data === '1') {
+                if (newStatus === 1) {
+                    btn.classList.remove('btn-secondary');
+                    btn.classList.add('btn-success');
+                    btn.textContent = 'Active';
+                } else {
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-secondary');
+                    btn.textContent = 'Inactive';
+                }
+                alert('success', 'Updated status successfully!');
+            } else {
+                alert('danger', 'Failed to update status! Try again');
+            }
+        })
+        .catch(err => {
+            console.error('Status update error:', err);
+        });
+}
+
+document.addEventListener('click', toggleUserStatus);
