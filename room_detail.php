@@ -123,7 +123,14 @@ require('server/class/setting.php');
                                 Children</span>
                         </div>
                         <?php if ($shutdown != 1): ?>
-                        <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-3">Book Now</a>
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                            <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-3">Book Now</a>
+                            <?php else: ?>
+                            <button type="button" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-3"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Book Now
+                            </button>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 </div>

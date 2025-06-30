@@ -157,7 +157,14 @@ require('server/class/setting.php');
                             <h6 class="my-4 mt-lg-0 mt-md-0">฿<?php echo number_format($room['price'], 0); ?> per night
                             </h6>
                             <?php if ($shutdown != 1): ?>
-                            <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                                <?php else: ?>
+                                <button type="button" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2"
+                                    data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    Book Now
+                                </button>
+                                <?php endif; ?>
                             <?php endif; ?>
                             <a href="room_detail.php?id=<?php echo $room['id']; ?>"
                                 class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>

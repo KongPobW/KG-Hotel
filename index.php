@@ -144,8 +144,15 @@ require('server/class/setting.php');
 
                         <div class="d-flex mb-2 gap-2">
                             <?php if ($shutdown != 1): ?>
-                            <a href="book.php?room_id=<?= $room['id'] ?>"
-                                class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="book.php?room_id=<?= $room['id'] ?>"
+                                    class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
+                                <?php else: ?>
+                                <button type="button" class="btn btn-sm text-white custom-bg shadow-none"
+                                    data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    Book Now
+                                </button>
+                                <?php endif; ?>
                             <?php endif; ?>
 
                             <a href="room_detail.php?id=<?= $room['id'] ?>"
