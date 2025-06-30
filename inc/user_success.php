@@ -20,7 +20,13 @@ window.addEventListener('DOMContentLoaded', () => {
 <script>
 window.addEventListener('DOMContentLoaded', () => {
     alert("success", "Login successful!");
-    history.replaceState(null, '', window.location.pathname);
+    if (!window.location.pathname.includes('room_detail.php')) {
+        history.replaceState(null, '', window.location.pathname);
+    } else {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('login_success');
+        window.history.replaceState(null, '', url.pathname + '?' + url.searchParams.toString());
+    }
 });
 </script>
 <?php endif; ?>

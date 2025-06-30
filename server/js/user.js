@@ -138,7 +138,9 @@ function loginUser(e) {
         .then(res => res.text())
         .then(data => {
             if (data === '1') {
-                window.location.href = "index.php?login_success=1";
+                const url = new URL(window.location.href);
+                url.searchParams.set('login_success', '1');
+                window.location.href = url.toString();
             } else if (data === 'invalid_email') {
                 alert("danger", "Email not found!", "#loginModal");
             } else if (data === 'invalid_password') {
@@ -188,9 +190,9 @@ function fetchUsers() {
                     <td>${user.dob}</td>
                     <td>
                         ${user.status == 1
-                            ? `<button class="btn btn-sm btn-success toggle-status-btn">Active</button>`
-                            : `<button class="btn btn-sm btn-secondary toggle-status-btn">Inactive</button>`
-                        }
+                        ? `<button class="btn btn-sm btn-success toggle-status-btn">Active</button>`
+                        : `<button class="btn btn-sm btn-secondary toggle-status-btn">Inactive</button>`
+                    }
                     </td>
                 </tr>
                 `;
