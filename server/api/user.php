@@ -100,6 +100,7 @@ if (isset($_POST['login_user'])) {
     session_start();
     $_SESSION['user_id'] = $user['sr_no'];
     $_SESSION['user_name'] = $user['name'];
+    $_SESSION['profile'] = $user['profile'];
 
     echo '1';
 }

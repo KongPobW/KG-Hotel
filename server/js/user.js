@@ -158,7 +158,7 @@ function fetchUsers() {
     const formData = new FormData();
     formData.append('get_users', true);
 
-    fetch('../server/api/user.php', {
+    fetch('server/api/user.php', {
         method: 'POST',
         body: formData
     })

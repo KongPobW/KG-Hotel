@@ -23,7 +23,16 @@
                     <a class="nav-link me-2" href="about.php">About Us</a>
                 </li>
             </ul>
-            <div class="d-flex">
+            <?php session_start(); ?>
+            <div class="d-flex align-items-center">
+                <?php if (isset($_SESSION['user_id'])): ?>
+                <div class="d-flex align-items-center me-3">
+                    <img src="<?= 'uploads/profiles/' . $_SESSION['profile'] ?>" class="rounded-circle me-3"
+                        style="width: 40px; height: 40px; object-fit: cover;">
+                    <span class="fw-bold"><?= htmlspecialchars($_SESSION['user_name']) ?></span>
+                </div>
+                <a href="logout.php" class="btn btn-outline-danger shadow-none">Logout</a>
+                <?php else: ?>
                 <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" data-bs-toggle="modal"
                     data-bs-target="#loginModal">
                     Login
@@ -32,6 +41,7 @@
                     data-bs-target="#registerModal">
                     Register
                 </button>
+                <?php endif; ?>
             </div>
         </div>
     </div>
