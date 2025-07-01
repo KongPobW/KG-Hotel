@@ -156,6 +156,19 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="promptpayModal" aria-labelledby="promptpayModalLabel" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="promptpayModalLabel">Scan QR to Pay</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="promptpay-qr" src="" style="width:250px;" alt="PromptPay QR Code">
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 function goBackToLogin() {
     const forgotModal = bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal'));

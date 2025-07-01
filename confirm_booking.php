@@ -107,18 +107,19 @@ require('server/class/setting.php');
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Check-In</label>
-                                    <input type="date" name="check-in" id="check-in-input-confirm" onchange="checkAvailability()"
-                                        class="form-control shadow-none" required>
+                                    <input type="date" name="check-in" id="check-in-input-confirm"
+                                        onchange="checkAvailability()" class="form-control shadow-none" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Check-Out</label>
-                                    <input type="date" name="check-out" id="check-out-input-confirm" onchange="checkAvailability()"
-                                        class="form-control shadow-none" required>
+                                    <input type="date" name="check-out" id="check-out-input-confirm"
+                                        onchange="checkAvailability()" class="form-control shadow-none" required>
                                 </div>
                                 <div class="col-12">
                                     <h6 class="mb-3 text-danger" id="pay-info">Provide check-in & check-out date!</h6>
-                                    <button name="pay-now" class="btn w-100 text-white custom-bg shadow-none">Pay
-                                        Now</button>
+                                    <button type="button" name="pay-now"
+                                        class="btn w-100 text-white custom-bg shadow-none"
+                                        onclick="createPromptPay()">Pay Now</button>
                                 </div>
                             </div>
                         </form>
