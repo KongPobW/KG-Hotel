@@ -43,7 +43,7 @@ require('server/class/setting.php');
     $roomObj = new Room($db);
     $room = $roomObj->getRoomById($room_id);
 
-    $GLOBALS['room'] = [
+    $_SESSION['room'] = [
         "id" => $room['id'],
         "name" => $room['name'],
         "price" => $room['price'],
@@ -85,7 +85,7 @@ require('server/class/setting.php');
             <div class="col-lg-5 col-md-12 px-4">
                 <div class="card mb-4 border-0 shadow-sm rounded-3">
                     <div class="card-body">
-                        <form action="#">
+                        <form id="booking-form" action="#">
                             <h6 class="mb-3">BOOKING DETAILS</h6>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -107,19 +107,16 @@ require('server/class/setting.php');
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Check-In</label>
-                                    <input type="date" name="check-in" id="check-in-input-confirm"
+                                    <input type="date" name="check-in" id="check-in-input-confirm" onchange="checkAvailability()"
                                         class="form-control shadow-none" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Check-Out</label>
-                                    <input type="date" name="check-out" id="check-out-input-confirm"
+                                    <input type="date" name="check-out" id="check-out-input-confirm" onchange="checkAvailability()"
                                         class="form-control shadow-none" required>
                                 </div>
                                 <div class="col-12">
-                                    <div class="spinner-border text-info" id="info-loader" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                    <h6 class="mb-3 text-danger">Provide check-in & check-out date!</h6>
+                                    <h6 class="mb-3 text-danger" id="pay-info">Provide check-in & check-out date!</h6>
                                     <button name="pay-now" class="btn w-100 text-white custom-bg shadow-none">Pay
                                         Now</button>
                                 </div>
@@ -136,6 +133,7 @@ require('server/class/setting.php');
     <?php require('public/script.php'); ?>
 
     <script src="server/js/user.js"></script>
+    <script src="server/js/confirm_booking.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
