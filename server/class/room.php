@@ -80,6 +80,15 @@ class Room {
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }    
+
+    public function getRoomCoverById($id) {
+        $query = "SELECT * FROM room_covers WHERE id_room = :id LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }    
 }
 
 $database = new Database();

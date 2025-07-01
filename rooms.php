@@ -158,7 +158,7 @@ require('server/class/setting.php');
                             </h6>
                             <?php if ($shutdown != 1): ?>
                                 <?php if (isset($_SESSION['user_id'])): ?>
-                                <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                                <a href="confirm_booking.php?id=<?php echo $room['id']; ?>" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
                                 <?php else: ?>
                                 <button type="button" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2"
                                     data-bs-toggle="modal" data-bs-target="#loginModal">

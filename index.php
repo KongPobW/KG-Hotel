@@ -145,7 +145,7 @@ require('server/class/setting.php');
                         <div class="d-flex mb-2 gap-2">
                             <?php if ($shutdown != 1): ?>
                                 <?php if (isset($_SESSION['user_id'])): ?>
-                                <a href="book.php?room_id=<?= $room['id'] ?>"
+                                <a href="confirm_booking.php?id=<?php echo $room['id']; ?>"
                                     class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
                                 <?php else: ?>
                                 <button type="button" class="btn btn-sm text-white custom-bg shadow-none"

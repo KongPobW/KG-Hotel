@@ -57,18 +57,18 @@ require('server/class/setting.php');
                 <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <?php 
-                    $roomImages = $roomObj->getRoomImagesById($room_id);
-                    if (!empty($roomImages)) {
-                        $active = true;
-                        foreach ($roomImages as $img) {
-                            $imagePath = 'uploads/rooms/images/' . htmlspecialchars($img['image']);
-                            echo '<div class="carousel-item' . ($active ? ' active' : '') . '">';
-                            echo '<img src="' . $imagePath . '" class="d-block w-100 rounded">';
-                            echo '</div>';
-                            $active = false;
-                        }
-                    }
-                    ?>
+                            $roomImages = $roomObj->getRoomImagesById($room_id);
+                            if (!empty($roomImages)) {
+                                $active = true;
+                                foreach ($roomImages as $img) {
+                                    $imagePath = 'uploads/rooms/images/' . htmlspecialchars($img['image']);
+                                    echo '<div class="carousel-item' . ($active ? ' active' : '') . '">';
+                                    echo '<img src="' . $imagePath . '" class="d-block w-100 rounded">';
+                                    echo '</div>';
+                                    $active = false;
+                                }
+                            }
+                        ?>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#roomCarousel"
                         data-bs-slide="prev">
@@ -123,14 +123,15 @@ require('server/class/setting.php');
                                 Children</span>
                         </div>
                         <?php if ($shutdown != 1): ?>
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                            <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-3">Book Now</a>
-                            <?php else: ?>
-                            <button type="button" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-3"
-                                data-bs-toggle="modal" data-bs-target="#loginModal">
-                                Book Now
-                            </button>
-                            <?php endif; ?>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                        <a href="confirm_booking.php?id=<?php echo $room['id']; ?>"
+                            class="btn btn-sm w-100 text-white custom-bg shadow-none mb-3">Book Now</a>
+                        <?php else: ?>
+                        <button type="button" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-3"
+                            data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Book Now
+                        </button>
+                        <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 </div>
