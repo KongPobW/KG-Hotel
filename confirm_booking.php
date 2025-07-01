@@ -76,7 +76,7 @@ require('server/class/setting.php');
                         echo '<div class="card p-3 shadow-sm rounded">';
                         echo '<img src="' . $imagePath . '" class="img-fluid rounded mb-3">';
                         echo '<h5>' . htmlspecialchars($room['name']) . "</h5>";
-                        echo '<h6>' . htmlspecialchars($room['price']) . " per night</h6>";
+                        echo '<h6>฿' . htmlspecialchars($room['price']) . " per night</h6>";
                         echo '</div>';
                     }
                 ?>
