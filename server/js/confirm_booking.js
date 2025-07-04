@@ -39,26 +39,3 @@ function checkAvailability() {
             })
     }
 }
-
-function createPromptPay() {
-    let formData = new FormData();
-    formData.append('generate_promptpay', true);
-
-    fetch('server/api/create_promptpay.php', {
-        method: 'POST',
-        body: formData
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === 'success') {
-                const qrImg = document.getElementById('promptpay-qr');
-                qrImg.src = data.qr_url;
-
-                const modalEl = document.getElementById('promptpayModal');
-                const promptpayModal = new bootstrap.Modal(modalEl);
-                promptpayModal.show();
-            } else {
-                alert('danger', 'Failed to generate QR code!');
-            }
-        });
-}
