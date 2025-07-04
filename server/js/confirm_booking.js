@@ -39,3 +39,30 @@ function checkAvailability() {
             })
     }
 }
+
+function createPromptPay() {
+    const phone = '0982592063';
+
+    const formData = new FormData();
+    formData.append('create_promptpay', true);
+    formData.append('phone', phone);
+
+    fetch('server/api/promptpay_qr.php', {
+        method: 'POST',
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.qr_url) {
+                document.getElementById('promptpay-qr').src = data.qr_url;
+
+                const promptpayModal = new bootstrap.Modal(document.getElementById('promptpayModal'));
+                promptpayModal.show();
+            } else {
+                alert('danger', data.error || 'Unable to generate QR code!');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
