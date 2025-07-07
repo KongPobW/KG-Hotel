@@ -69,7 +69,7 @@ if (isset($_POST['check_availability'])) {
     $_SESSION['room']['payment'] = $final_payment;
     $_SESSION['room']['available'] = true;
 
-    $result = json_encode(["status" => "available", "days" => $count_days, "payment" => $payment]);
+    $result = json_encode(["status" => "available", "days" => $count_days, "payment" => $final_payment]);
     echo $result;
 }
 
