@@ -66,3 +66,39 @@ function createPromptPay() {
             console.error('Error:', error);
         });
 }
+
+function saveBooking() {
+    let phone = bookFormElement.elements['phone'].value;
+    let name = bookFormElement.elements['name'].value;
+    let address = bookFormElement.elements['address'].value;
+    let checkOut = bookFormElement.elements['check-out'].value;
+    let checkIn = bookFormElement.elements['check-in'].value;
+
+    const slipInput = document.getElementById('slip-upload');
+    const file = slipInput.files[0];
+
+    const formData = new FormData();
+    formData.append('save_booking', true);
+    formData.append('phone', phone);
+    formData.append('name', name);
+    formData.append('address', address);
+    formData.append('check_out_date', checkOut);
+    formData.append('check_in_date', checkIn);
+    formData.append('slip', file);
+
+    fetch('server/api/confirm_booking.php', {
+        method: 'POST',
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === 'success') {
+                window.location.href = `thankyou.php?booking_id=${data.booking_id}`;
+            } else {
+                alert('danger', data.message);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}

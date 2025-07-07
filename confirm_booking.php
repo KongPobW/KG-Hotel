@@ -47,6 +47,7 @@ require('server/class/setting.php');
         "id" => $room['id'],
         "name" => $room['name'],
         "price" => $room['price'],
+        "num_nights" => null,
         "payment" => null,
         "available" => false,
     ];

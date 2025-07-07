@@ -163,9 +163,18 @@
                 <h5 class="modal-title" id="promptpayModalLabel">Scan QR to Pay</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
-                <img id="promptpay-qr" src="" style="width:250px;" alt="PromptPay QR Code">
-            </div>
+            <form id="payment-proof-form">
+                <div class="modal-body">
+                    <img id="promptpay-qr" src="" style="width:250px;" alt="PromptPay QR Code">
+                    <div class="mt-3">
+                        <label for="slip-upload" class="form-label small">Upload Payment Slip</label>
+                        <input class="form-control" type="file" id="slip-upload" name="slip" accept="image/*" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary w-100" onclick="saveBooking()">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
