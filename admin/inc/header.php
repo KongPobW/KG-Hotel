@@ -31,6 +31,9 @@
                         <a class="nav-link text-light" href="user_contact.php" id="user-contacts-link">User Contacts</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-light" href="payment_proof.php" id="payment-proof-link">Payment Proof</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" href="setting.php" id="setting-link">Setting</a>
                     </li>
                 </ul>
@@ -62,6 +65,10 @@ window.onload = function() {
         {
             id: 'user-contacts-link',
             path: '/user_contact.php'
+        },
+        {
+            id: 'payment-proof-link',
+            path: '/payment_proof.php'
         },
         {
             id: 'setting-link',
