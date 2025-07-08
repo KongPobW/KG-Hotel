@@ -18,6 +18,13 @@ if (isset($_POST['get_payment_proof'])) {
         JOIN booking_order bo ON bd.booking_id = bo.booking_id
         LEFT JOIN room r ON r.id = bd.room_id
         LEFT JOIN payment_proof pp ON bo.booking_id = pp.booking_id
+        ORDER BY 
+            CASE 
+                WHEN bo.status = 'refunding' THEN 0
+                WHEN pp.verified = 0 THEN 1
+                WHEN pp.verified = 1 THEN 2
+                ELSE 3
+            END
     ");
     $stmt->execute();
 
