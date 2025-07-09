@@ -34,6 +34,9 @@
                         <a class="nav-link text-light" href="payment_proof.php" id="payment-proof-link">Payment Proof</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-light" href="booking.php" id="booking-link">Booking</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" href="setting.php" id="setting-link">Setting</a>
                     </li>
                 </ul>
@@ -69,6 +72,10 @@ window.onload = function() {
         {
             id: 'payment-proof-link',
             path: '/payment_proof.php'
+        },
+        {
+            id: 'booking-link',
+            path: '/booking.php'
         },
         {
             id: 'setting-link',
