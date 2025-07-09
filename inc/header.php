@@ -23,7 +23,11 @@
                     <a class="nav-link me-2" href="about.php">About Us</a>
                 </li>
             </ul>
-            <?php session_start(); ?>
+            <?php
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            ?>
             <div class="d-flex align-items-center">
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="dropdown mb-2">
@@ -35,7 +39,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="profileDropdown">
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="booking_history.php">
                                 <i class="bi bi-calendar-check me-2"></i> My Booking
                             </a>
                         </li>
