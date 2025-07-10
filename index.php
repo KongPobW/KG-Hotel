@@ -100,6 +100,7 @@ require('server/class/setting.php');
     <div class="container">
         <div class="row justify-content-center">
             <?php $rooms = $roomObj->getFilteredRoomsWithLimit(3); ?>
+            <?php if (count($rooms) > 0): ?>
             <?php foreach ($rooms as $room): ?>
             <div class="col-lg-4 col-md-6 my-3">
                 <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
@@ -154,6 +155,11 @@ require('server/class/setting.php');
                 </div>
             </div>
             <?php endforeach; ?>
+            <?php else: ?>
+            <div class="col-12 text-center">
+                <h5 class="text-muted mt-1 mb-0">No rooms found matching your checking</h5>
+            </div>
+            <?php endif; ?>
 
             <div class="col-lg-12 text-center mt-5">
                 <a href="rooms.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Rooms ></a>
