@@ -2,6 +2,8 @@
 require('public/db_config.php');
 require('server/class/contact_detail.php');
 require('server/class/room.php');
+require('server/class/facility.php');
+require('server/class/feature.php');
 require('server/class/setting.php');
 ?>
 
@@ -39,81 +41,98 @@ require('server/class/setting.php');
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0 px-lg-0">
-                <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white rounded lg-shadow">
                     <div class="container-fluid flex-lg-column align-items-stretch">
-                        <h4 class="mt-2">FILTERS</h4>
-                        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#filter-dropdown" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                        <h4 class="mt-2 d-none d-lg-block">FILTERS</h4>
+                        <button class="navbar-toggler shadow-none mb-lg-2" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filter-dropdown" aria-controls="filter-dropdown" aria-expanded="false"
+                            aria-label="ToggleFilter">
+                            <span class="navbar-toggler-icon"></span> FILTERS
                         </button>
 
                         <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filter-dropdown">
-                            <div class="border bg-light p-3 rounded mb-3">
-                                <h5 class="mb-3" style="font-size: 18px;">CHECK AVAILABILITY</h5>
-                                <label class="form-label">Check-In</label>
-                                <input type="date" class="form-control shadow-none mb-3">
-                                <label class="form-label">Check-Out</label>
-                                <input type="date" class="form-control shadow-none">
-                            </div>
+                            <form method="GET" class="w-100">
+                                <div class="border bg-light p-3 rounded mb-3">
+                                    <h5 class="mb-3" style="font-size: 18px;">CHECK AVAILABILITY</h5>
+                                    <label class="form-label">Check-In</label>
+                                    <input type="date" name="checkin" value="<?= $_GET['checkin'] ?? '' ?>"
+                                        class="form-control shadow-none mb-3">
+                                    <label class="form-label">Check-Out</label>
+                                    <input type="date" name="checkout" value="<?= $_GET['checkout'] ?? '' ?>"
+                                        class="form-control shadow-none">
+                                </div>
 
-                            <div class="border bg-light p-3 rounded mb-3">
-                                <h5 class="mb-3" style="font-size: 18px;">FACILITIES</h5>
-                                <div class="mb-2">
-                                    <input type="checkbox" id="f1" class="form-check-input shadow-none me-1">
-                                    <label class="form-check-label" for="f1">Facility 1</label>
+                                <div class="border bg-light p-3 rounded mb-3">
+                                    <h5 class="mb-3" style="font-size: 18px;">FACILITIES</h5>
+                                    <?php foreach ($facilities as $f): ?>
+                                    <div class="mb-2">
+                                        <input type="checkbox" id="fac_<?= $f['id'] ?>" name="facilities[]"
+                                            value="<?= $f['name'] ?>" class="form-check-input shadow-none me-1"
+                                            <?= (isset($_GET['facilities']) && in_array($f['name'], $_GET['facilities'])) ? 'checked' : '' ?>>
+                                        <label class="form-check-label"
+                                            for="fac_<?= $f['id'] ?>"><?= $f['name'] ?></label>
+                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
-                                <div class="mb-2">
-                                    <input type="checkbox" id="f2" class="form-check-input shadow-none me-1">
-                                    <label class="form-check-label" for="f2">Facility 2</label>
-                                </div>
-                                <div class="mb-2">
-                                    <input type="checkbox" id="f3" class="form-check-input shadow-none me-1">
-                                    <label class="form-check-label" for="f3">Facility 3</label>
-                                </div>
-                            </div>
 
-                            <div class="border bg-light p-3 rounded mb-3">
-                                <h5 class="mb-3" style="font-size: 18px;">GUESTS</h5>
-                                <div class="d-flex justify-content-between gap-3">
-                                    <div class="w-100">
-                                        <label class="form-label">Adults</label>
-                                        <select class="form-select shadow-none">
-                                            <option value="1" selected>1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                        </select>
+                                <div class="border bg-light p-3 rounded mb-3">
+                                    <h5 class="mb-3" style="font-size: 18px;">FEATURES</h5>
+                                    <?php foreach ($features as $feature): ?>
+                                    <div class="mb-2">
+                                        <input type="checkbox" id="feat_<?= $feature['id'] ?>" name="features[]"
+                                            value="<?= $feature['name'] ?>" class="form-check-input shadow-none me-1"
+                                            <?= (isset($_GET['features']) && in_array($feature['name'], $_GET['features'])) ? 'checked' : '' ?>>
+                                        <label class="form-check-label"
+                                            for="feat_<?= $feature['id'] ?>"><?= $feature['name'] ?></label>
                                     </div>
-                                    <div class="w-100">
-                                        <label class="form-label">Children</label>
-                                        <select class="form-select shadow-none">
-                                            <option value="1" selected>1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                        </select>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <div class="border bg-light p-3 rounded mb-3">
+                                    <h5 class="mb-3" style="font-size: 18px;">GUESTS</h5>
+                                    <div class="d-flex justify-content-between gap-3">
+                                        <div class="w-100">
+                                            <label class="form-label">Adults</label>
+                                            <select name="adults" class="form-select shadow-none">
+                                                <?php for ($i = 1; $i <= 10; $i++): ?>
+                                                <option value="<?= $i ?>"
+                                                    <?= (isset($_GET['adults']) && $_GET['adults'] == $i) ? 'selected' : '' ?>>
+                                                    <?= $i ?></option>
+                                                <?php endfor; ?>
+                                            </select>
+                                        </div>
+                                        <div class="w-100">
+                                            <label class="form-label">Children</label>
+                                            <select name="children" class="form-select shadow-none">
+                                                <?php for ($i = 0; $i <= 10; $i++): ?>
+                                                <option value="<?= $i ?>"
+                                                    <?= (isset($_GET['children']) && $_GET['children'] == $i) ? 'selected' : '' ?>>
+                                                    <?= $i ?></option>
+                                                <?php endfor; ?>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="d-grid gap-2 mb-3">
+                                    <button type="submit" class="btn btn-sm btn-primary">Filter</button>
+                                    <a href="rooms.php" class="btn btn-sm btn-outline-secondary">Clear</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </nav>
             </div>
 
             <div class="col-lg-9 col-md-12 px-4">
+                <?php if (empty($rooms)): ?>
+                <div class="alert alert-warning text-center d-flex align-items-center justify-content-center gap-2 mb-0" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill fs-4"></i>
+                    <div>
+                        <strong>No rooms found</strong> based on your selected filters
+                    </div>
+                </div>
+                <?php else: ?>
                 <?php foreach ($rooms as $room): ?>
                 <div class="card mb-4 border-0 shadow">
                     <div class="row g-0 p-3 align-items-center">
@@ -157,14 +176,14 @@ require('server/class/setting.php');
                             <h6 class="my-4 mt-lg-0 mt-md-0">฿<?php echo number_format($room['price'], 0); ?> per night
                             </h6>
                             <?php if ($shutdown != 1): ?>
-                                <?php if (isset($_SESSION['user_id'])): ?>
+                            <?php if (isset($_SESSION['user_id'])): ?>
                                 <a href="confirm_booking.php?id=<?php echo $room['id']; ?>" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
-                                <?php else: ?>
-                                <button type="button" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2"
-                                    data-bs-toggle="modal" data-bs-target="#loginModal">
-                                    Book Now
-                                </button>
-                                <?php endif; ?>
+                            <?php else: ?>
+                            <button type="button" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Book Now
+                            </button>
+                            <?php endif; ?>
                             <?php endif; ?>
                             <a href="room_detail.php?id=<?php echo $room['id']; ?>"
                                 class="btn btn-sm w-100 btn-outline-dark shadow-none">Details</a>
@@ -172,6 +191,7 @@ require('server/class/setting.php');
                     </div>
                 </div>
                 <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
