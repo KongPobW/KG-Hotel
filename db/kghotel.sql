@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2025 at 03:34 AM
+-- Generation Time: Jul 10, 2025 at 11:52 AM
 -- Server version: 11.7.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,6 +39,58 @@ CREATE TABLE `admin_cred` (
 
 INSERT INTO `admin_cred` (`sr_no`, `admin_name`, `admin_pass`) VALUES
 (1, 'kongpob', 'kg1234');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_details`
+--
+
+CREATE TABLE `booking_details` (
+  `book_detail_id` int(11) NOT NULL,
+  `booking_id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `price_per_night` decimal(10,0) NOT NULL,
+  `num_nights` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `pnumber` varchar(10) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `subtotal` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `booking_details`
+--
+
+INSERT INTO `booking_details` (`book_detail_id`, `booking_id`, `room_id`, `price_per_night`, `num_nights`, `name`, `pnumber`, `address`, `subtotal`) VALUES
+(1, 1, 2, 2400, 1, 'kongpob', '0982592063', 'BKK', 2400),
+(2, 2, 5, 4000, 2, 'kongpob', '0982592063', 'BKK', 8000),
+(3, 3, 3, 4200, 1, 'kongpob', '0982592063', 'BKK', 4200);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_order`
+--
+
+CREATE TABLE `booking_order` (
+  `booking_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `booking_date` datetime NOT NULL,
+  `check_in_date` datetime NOT NULL,
+  `check_out_date` datetime NOT NULL,
+  `total_amount` decimal(10,0) NOT NULL,
+  `status` enum('pending','completed','cancelled','refunding') NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `booking_order`
+--
+
+INSERT INTO `booking_order` (`booking_id`, `user_id`, `booking_date`, `check_in_date`, `check_out_date`, `total_amount`, `status`) VALUES
+(1, 1, '2025-07-07 14:23:12', '2025-07-07 00:00:00', '2025-07-08 00:00:00', 2400, 'cancelled'),
+(2, 1, '2025-07-08 08:20:45', '2025-07-08 00:00:00', '2025-07-10 00:00:00', 8000, 'completed'),
+(3, 1, '2025-07-08 08:21:26', '2025-07-11 00:00:00', '2025-07-12 00:00:00', 4200, 'refunding');
 
 -- --------------------------------------------------------
 
@@ -129,6 +181,32 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payment_proof`
+--
+
+CREATE TABLE `payment_proof` (
+  `payment_id` int(11) NOT NULL,
+  `booking_id` int(11) NOT NULL,
+  `payment_date` datetime NOT NULL,
+  `amount_paid` decimal(10,0) NOT NULL,
+  `proof_file_arrival` text NOT NULL,
+  `proof_file_refund` text DEFAULT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT 0,
+  `verified_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `payment_proof`
+--
+
+INSERT INTO `payment_proof` (`payment_id`, `booking_id`, `payment_date`, `amount_paid`, `proof_file_arrival`, `proof_file_refund`, `verified`, `verified_at`) VALUES
+(1, 1, '2025-07-07 14:23:12', 2400, 'slip_kongpob_2_20250707_686b75e04992b.jpg', 'slip_refund_1751877758_Tpcorp 1x1.jpg', 1, '2025-07-07 15:41:56'),
+(2, 2, '2025-07-08 08:20:45', 8000, 'slip_kongpob_5_20250708_686c726d65fc4.jpg', NULL, 0, NULL),
+(3, 3, '2025-07-08 08:21:26', 4200, 'slip_kongpob_3_20250708_686c72968c621.jpg', NULL, 0, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `room`
 --
 
@@ -149,11 +227,11 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id`, `name`, `area`, `price`, `quant`, `adult`, `children`, `description`, `status`) VALUES
-(1, 'Deluxe King Room', 350, 2800, 5, 2, 1, 'Spacious room with a king-size bed, private balcony, modern bathroom, free Wi-Fi, and complimentary breakfast. Ideal for couples or small families.', 1),
-(2, 'Superior Twin Room', 300, 2400, 8, 2, 0, 'Comfortable twin beds, work desk, flat-screen TV, and high-speed internet. Perfect for business travelers or friends.', 1),
-(3, 'Family Suite', 500, 4200, 5, 3, 2, 'Large suite with a living area, two queen beds, a sofa bed, kitchenette, and kids-friendly amenities. Ideal for families.', 1),
+(1, 'Deluxe King Room', 350, 2800, 4, 2, 1, 'Spacious room with a king-size bed, private balcony, modern bathroom, free Wi-Fi, and complimentary breakfast. Ideal for couples or small families.', 1),
+(2, 'Superior Twin Room', 300, 2400, 6, 2, 0, 'Comfortable twin beds, work desk, flat-screen TV, and high-speed internet. Perfect for business travelers or friends.', 1),
+(3, 'Family Suite', 500, 4200, 3, 3, 2, 'Large suite with a living area, two queen beds, a sofa bed, kitchenette, and kids-friendly amenities. Ideal for families.', 1),
 (4, 'Executive Suite', 600, 5200, 3, 2, 1, 'Luxury suite featuring a separate lounge area, king-size bed, city view, bathtub, and executive work space. Perfect for long stays or business executives.', 1),
-(5, 'KG King Room', 380, 4000, 2, 2, 0, 'Spacious room with a king-size bed, private balcony, modern bathroom, free Wi-Fi, and complimentary breakfast. Ideal for couples or small families.', 1);
+(5, 'KG King Room', 380, 4000, 1, 2, 0, 'Spacious room with a king-size bed, private balcony, modern bathroom, free Wi-Fi, and complimentary breakfast. Ideal for couples or small families.', 1);
 
 --
 -- Triggers `room`
@@ -210,32 +288,6 @@ CREATE TABLE `room_facilities` (
   `id_facilities` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
---
--- Dumping data for table `room_facilities`
---
-
-INSERT INTO `room_facilities` (`sr_no`, `id_room`, `id_facilities`) VALUES
-(1, 4, 4),
-(2, 4, 3),
-(3, 4, 2),
-(4, 4, 1),
-(5, 3, 4),
-(6, 3, 3),
-(7, 3, 2),
-(8, 3, 1),
-(9, 2, 4),
-(10, 2, 3),
-(11, 2, 2),
-(12, 2, 1),
-(17, 5, 5),
-(18, 5, 4),
-(19, 5, 3),
-(20, 5, 2),
-(21, 1, 4),
-(22, 1, 3),
-(23, 1, 2),
-(24, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -248,25 +300,6 @@ CREATE TABLE `room_features` (
   `id_features` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
---
--- Dumping data for table `room_features`
---
-
-INSERT INTO `room_features` (`sr_no`, `id_room`, `id_features`) VALUES
-(1, 4, 3),
-(2, 4, 2),
-(3, 4, 1),
-(4, 3, 3),
-(5, 3, 2),
-(6, 3, 1),
-(7, 2, 2),
-(8, 2, 1),
-(11, 5, 3),
-(12, 5, 2),
-(13, 5, 1),
-(14, 1, 2),
-(15, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -278,21 +311,6 @@ CREATE TABLE `room_images` (
   `image` varchar(255) NOT NULL,
   `id_room` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
-
---
--- Dumping data for table `room_images`
---
-
-INSERT INTO `room_images` (`id`, `image`, `id_room`) VALUES
-(1, 'image_1746418602_1280x720-placeholder.webp', 1),
-(3, 'image_1746418617_1280x720-placeholder.webp', 2),
-(4, 'image_1746418622_1280x720-placeholder.webp', 2),
-(5, 'image_1746418634_1280x720-placeholder.webp', 3),
-(6, 'image_1746418642_1280x720-placeholder.webp', 3),
-(7, 'image_1746418650_1280x720-placeholder.webp', 4),
-(8, 'image_1746418654_1280x720-placeholder.webp', 4),
-(9, 'image_1746693833_1280x720-placeholder.webp', 5),
-(10, 'image_1747389410_1280x720-placeholder.webp', 5);
 
 -- --------------------------------------------------------
 
@@ -372,7 +390,7 @@ CREATE TABLE `user_cred` (
 --
 
 INSERT INTO `user_cred` (`sr_no`, `name`, `email`, `address`, `pnumber`, `pincode`, `dob`, `profile`, `password`, `t_expire`, `status`, `datentime`) VALUES
-(1, 'Kongpob', 'kongpob.wisitsak@gmail.com', 'BKK', '0982592063', 1234, '2025-05-16', 'IMG_6826f8c7ba1996.86291512.jpg', '$2y$10$wMb4xyCedz1fvFVvkvHWvuA7kFKq7dQuUdOX1wPPnNzfiFt3w1uIi', NULL, 1, '2025-05-16 15:35:19');
+(1, 'kongpob', 'kongpob@gmail.com', 'BKK', '0982592063', 1234, '2025-06-27', 'IMG_685e3a70d15db3.84717049.jpg', '$2y$10$9ltG0hQQI.D/qWXxCz.L1uJbIPu/mq4GacrO2LfTdUa.QwOXEF1Qe', NULL, 1, '2025-06-27 13:30:08');
 
 --
 -- Indexes for dumped tables
@@ -383,6 +401,21 @@ INSERT INTO `user_cred` (`sr_no`, `name`, `email`, `address`, `pnumber`, `pincod
 --
 ALTER TABLE `admin_cred`
   ADD PRIMARY KEY (`sr_no`);
+
+--
+-- Indexes for table `booking_details`
+--
+ALTER TABLE `booking_details`
+  ADD PRIMARY KEY (`book_detail_id`),
+  ADD KEY `fk_booking_details_booking` (`booking_id`),
+  ADD KEY `fk_booking_details_room` (`room_id`);
+
+--
+-- Indexes for table `booking_order`
+--
+ALTER TABLE `booking_order`
+  ADD PRIMARY KEY (`booking_id`),
+  ADD KEY `fk_booking_order_user` (`user_id`);
 
 --
 -- Indexes for table `contact_details`
@@ -401,6 +434,13 @@ ALTER TABLE `facilities`
 --
 ALTER TABLE `features`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_proof`
+--
+ALTER TABLE `payment_proof`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `fk_payment_proof_booking` (`booking_id`);
 
 --
 -- Indexes for table `room`
@@ -467,6 +507,18 @@ ALTER TABLE `admin_cred`
   MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `booking_details`
+--
+ALTER TABLE `booking_details`
+  MODIFY `book_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `booking_order`
+--
+ALTER TABLE `booking_order`
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `contact_details`
 --
 ALTER TABLE `contact_details`
@@ -485,6 +537,12 @@ ALTER TABLE `features`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `payment_proof`
+--
+ALTER TABLE `payment_proof`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
@@ -500,19 +558,19 @@ ALTER TABLE `room_covers`
 -- AUTO_INCREMENT for table `room_facilities`
 --
 ALTER TABLE `room_facilities`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `room_features`
 --
 ALTER TABLE `room_features`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `room_images`
 --
 ALTER TABLE `room_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `setting`
@@ -535,6 +593,25 @@ ALTER TABLE `user_cred`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `booking_details`
+--
+ALTER TABLE `booking_details`
+  ADD CONSTRAINT `fk_booking_details_booking` FOREIGN KEY (`booking_id`) REFERENCES `booking_order` (`booking_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_booking_details_room` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `booking_order`
+--
+ALTER TABLE `booking_order`
+  ADD CONSTRAINT `fk_booking_order_user` FOREIGN KEY (`user_id`) REFERENCES `user_cred` (`sr_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `payment_proof`
+--
+ALTER TABLE `payment_proof`
+  ADD CONSTRAINT `fk_payment_proof_booking` FOREIGN KEY (`booking_id`) REFERENCES `booking_order` (`booking_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `room_covers`
