@@ -55,44 +55,36 @@ require('server/class/setting.php');
         <div class="row">
             <div class="col-lg-12 bg-white shadow p-4 rounded">
                 <h5 class="mb-3">Check Booking Availability</h5>
-                <form>
+                <form method="GET">
                     <div class="row align-items-end">
                         <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Check-In</label>
-                            <input type="date" class="form-control shadow-none">
+                            <label class="form-label">Check-In</label>
+                            <input type="date" name="checkin" class="form-control shadow-none"
+                                value="<?= $_GET['checkin'] ?? '' ?>">
                         </div>
                         <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Check-Out</label>
-                            <input type="date" class="form-control shadow-none">
+                            <label class="form-label">Check-Out</label>
+                            <input type="date" name="checkout" class="form-control shadow-none"
+                                value="<?= $_GET['checkout'] ?? '' ?>">
                         </div>
                         <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Adult</label>
-                            <select class="form-select shadow-none">
-                                <option value="1" selected>1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
+                            <label class="form-label">Adult</label>
+                            <select name="adults" class="form-select shadow-none">
+                                <?php for ($i = 1; $i <= 10; $i++): ?>
+                                <option value="<?= $i ?>"
+                                    <?= (isset($_GET['adults']) && $_GET['adults'] == $i) ? 'selected' : '' ?>><?= $i ?>
+                                </option>
+                                <?php endfor; ?>
                             </select>
                         </div>
                         <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Children</label>
-                            <select class="form-select shadow-none">
-                                <option value="1" selected>1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
+                            <label class="form-label">Children</label>
+                            <select name="children" class="form-select shadow-none">
+                                <?php for ($i = 1; $i <= 10; $i++): ?>
+                                <option value="<?= $i ?>"
+                                    <?= (isset($_GET['children']) && $_GET['children'] == $i) ? 'selected' : '' ?>>
+                                    <?= $i ?></option>
+                                <?php endfor; ?>
                             </select>
                         </div>
                         <div class="col-lg-1 mb-lg-3 mt-2">
@@ -106,8 +98,8 @@ require('server/class/setting.php');
     <!-- our rooms -->
     <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">OUR ROOMS</h2>
     <div class="container">
-        <div class="row">
-            <?php $rooms = $roomObj->getRoomsLimit(3); ?>
+        <div class="row justify-content-center">
+            <?php $rooms = $roomObj->getFilteredRoomsWithLimit(3); ?>
             <?php foreach ($rooms as $room): ?>
             <div class="col-lg-4 col-md-6 my-3">
                 <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
@@ -144,15 +136,15 @@ require('server/class/setting.php');
 
                         <div class="d-flex mb-2 gap-2">
                             <?php if ($shutdown != 1): ?>
-                                <?php if (isset($_SESSION['user_id'])): ?>
-                                <a href="confirm_booking.php?id=<?php echo $room['id']; ?>"
-                                    class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
-                                <?php else: ?>
-                                <button type="button" class="btn btn-sm text-white custom-bg shadow-none"
-                                    data-bs-toggle="modal" data-bs-target="#loginModal">
-                                    Book Now
-                                </button>
-                                <?php endif; ?>
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                            <a href="confirm_booking.php?id=<?php echo $room['id']; ?>"
+                                class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
+                            <?php else: ?>
+                            <button type="button" class="btn btn-sm text-white custom-bg shadow-none"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Book Now
+                            </button>
+                            <?php endif; ?>
                             <?php endif; ?>
 
                             <a href="room_detail.php?id=<?= $room['id'] ?>"
