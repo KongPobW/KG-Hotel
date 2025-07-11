@@ -36,10 +36,9 @@ require('server/class/setting.php');
         <div class="h-line bg-dark"></div>
         <div class="row">
             <p class="text-center mt-3 w-75 mx-auto">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis sequi
-                facilis consequuntur voluptatum exercitationem, obcaecati possimus labore iste qui delectus sit omnis
-                dolorum ut
-                cumque reiciendis vitae quibusdam officia. Repellendus.
+                KG Hotel offers a tasty breakfast with hot dishes, fresh fruit, and pastries every morning. Enjoy
+                high-speed WiFi, hot water, and TV entertainment in every room. Stay comfortable with air conditioning
+                for a relaxing stay.
             </p>
         </div>
     </div>

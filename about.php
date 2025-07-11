@@ -35,10 +35,7 @@ require('server/class/setting.php');
         <div class="h-line bg-dark"></div>
         <div class="row">
             <p class="text-center mt-3 w-75 mx-auto">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis sequi
-                facilis consequuntur voluptatum exercitationem, obcaecati possimus labore iste qui delectus sit omnis
-                dolorum ut
-                cumque reiciendis vitae quibusdam officia. Repellendus.
+                <?= nl2br(htmlspecialchars($site_about)) ?>
             </p>
         </div>
     </div>
@@ -46,10 +43,13 @@ require('server/class/setting.php');
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-lg-6 col-md-5 mb-4 order-2 order-lg-1 order-md-1">
-                <h3 class="mb-3">Lorem ipsum dolor</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid, doloremque. Fugiat saepe totam
-                    perferendis odit reiciendis ducimus inventore, vitae cum tempora illum unde ut deserunt eius cumque
-                    deleniti facilis esse?</p>
+                <h3 class="mb-3">James Clark</h3>
+                <p>
+                    Visionary CEO and founder of KG Hotel, James Clark brings years of international hospitality
+                    experience and a passion for authentic Thai culture. Under his leadership, KG Hotel has grown into a
+                    modern, guest-focused retreat that blends comfort with genuine Thai warmth. James is dedicated to
+                    creating memorable stays by combining innovative service with heartfelt hospitality.
+                </p>
             </div>
             <div class="col-lg-5 col-md-5 mb-4 order-1 order-lg-2 order-md-2">
                 <img src="images/about/about.jpg" class="w-100">

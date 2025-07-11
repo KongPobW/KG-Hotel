@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2025 at 11:52 AM
+-- Generation Time: Jul 11, 2025 at 03:43 AM
 -- Server version: 11.7.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,7 +38,8 @@ CREATE TABLE `admin_cred` (
 --
 
 INSERT INTO `admin_cred` (`sr_no`, `admin_name`, `admin_pass`) VALUES
-(1, 'kongpob', 'kg1234');
+(1, 'kongpob', 'kg1234'),
+(2, 'admin', 'ad1234');
 
 -- --------------------------------------------------------
 
@@ -288,6 +289,35 @@ CREATE TABLE `room_facilities` (
   `id_facilities` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
+--
+-- Dumping data for table `room_facilities`
+--
+
+INSERT INTO `room_facilities` (`sr_no`, `id_room`, `id_facilities`) VALUES
+(1, 2, 4),
+(2, 2, 3),
+(3, 2, 2),
+(4, 2, 1),
+(5, 1, 4),
+(6, 1, 3),
+(7, 1, 2),
+(8, 1, 1),
+(9, 5, 5),
+(10, 5, 4),
+(11, 5, 3),
+(12, 5, 2),
+(13, 5, 1),
+(14, 3, 5),
+(15, 3, 4),
+(16, 3, 3),
+(17, 3, 2),
+(18, 3, 1),
+(19, 4, 5),
+(20, 4, 4),
+(21, 4, 3),
+(22, 4, 2),
+(23, 4, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -299,6 +329,24 @@ CREATE TABLE `room_features` (
   `id_room` int(11) NOT NULL,
   `id_features` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `room_features`
+--
+
+INSERT INTO `room_features` (`sr_no`, `id_room`, `id_features`) VALUES
+(1, 2, 2),
+(2, 2, 1),
+(3, 1, 2),
+(4, 1, 1),
+(5, 5, 2),
+(6, 5, 1),
+(7, 3, 3),
+(8, 3, 2),
+(9, 3, 1),
+(10, 4, 3),
+(11, 4, 2),
+(12, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -312,6 +360,22 @@ CREATE TABLE `room_images` (
   `id_room` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
+--
+-- Dumping data for table `room_images`
+--
+
+INSERT INTO `room_images` (`id`, `image`, `id_room`) VALUES
+(1, 'image_1752196135_1280x720-placeholder.webp', 1),
+(2, 'image_1752196147_1280x720-placeholder.webp', 1),
+(3, 'image_1752196157_1280x720-placeholder.webp', 2),
+(4, 'image_1752196163_1280x720-placeholder.webp', 2),
+(5, 'image_1752196170_1280x720-placeholder.webp', 3),
+(6, 'image_1752196175_1280x720-placeholder.webp', 3),
+(7, 'image_1752196180_1280x720-placeholder.webp', 4),
+(8, 'image_1752196185_1280x720-placeholder.webp', 4),
+(9, 'image_1752196194_1280x720-placeholder.webp', 5),
+(10, 'image_1752196198_1280x720-placeholder.webp', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -321,7 +385,7 @@ CREATE TABLE `room_images` (
 CREATE TABLE `setting` (
   `sr_no` int(11) NOT NULL,
   `site_title` varchar(50) NOT NULL,
-  `site_about` varchar(255) NOT NULL,
+  `site_about` text NOT NULL,
   `shutdown` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
@@ -330,7 +394,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`sr_no`, `site_title`, `site_about`, `shutdown`) VALUES
-(1, 'KG HOTEL', 'KG Hotel is Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus aliquid beatae iure molestias ipsum itaque, adipisci quas ad eum inventore assumenda dignissimos incidunt quos, ratione expedita facere? Totam, accusantium pariatur.', 0);
+(1, 'KG HOTEL', 'KG Hotel is a modern and welcoming retreat in the heart of Thailand, offering stylish comfort, friendly service, and easy access to local attractions. Whether you\'re traveling for business or leisure, KG Hotel provides a relaxing stay with a touch of Thai charm.', 0);
 
 -- --------------------------------------------------------
 
@@ -504,7 +568,7 @@ ALTER TABLE `user_cred`
 -- AUTO_INCREMENT for table `admin_cred`
 --
 ALTER TABLE `admin_cred`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `booking_details`
@@ -558,19 +622,19 @@ ALTER TABLE `room_covers`
 -- AUTO_INCREMENT for table `room_facilities`
 --
 ALTER TABLE `room_facilities`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `room_features`
 --
 ALTER TABLE `room_features`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `room_images`
 --
 ALTER TABLE `room_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `setting`
