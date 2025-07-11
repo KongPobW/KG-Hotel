@@ -12,7 +12,7 @@ class Dashboard {
     }
 
     public function getTotalBookedRooms() {
-        $query = "SELECT COUNT(*) FROM booking_details";
+        $query = "SELECT COUNT(*) FROM booking_details bd JOIN booking_order bo ON bd.booking_id = bo.booking_id WHERE status <> 'cancelled'";
         return $this->conn->query($query)->fetchColumn();
     }
 
